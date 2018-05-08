@@ -9,8 +9,8 @@ All papers are written in English unless otherwise noted.
 
 ## Original Work
 - `2016-08` [Bachelor Thesis](https://github.com/marc1404/papers/blob/master/documents/Bachelor%20Thesis.pdf) 🇩🇪
-- `2017-09` [Wreck Sam - An Intelligent Serious Game](https://github.com/marc1404/papers/blob/master/documents/Wreck%20Sam%20-%20An%20Intelligent%20Serious%20Game.pdf)
-- `2017-09` [Knowledge on the Web](https://github.com/marc1404/papers/blob/master/documents/Knowledge%20on%20the%20Web.pdf)
+- `2017-10` [Wreck Sam - An Intelligent Serious Game](https://github.com/marc1404/papers/blob/master/documents/Wreck%20Sam%20-%20An%20Intelligent%20Serious%20Game.pdf)
+- `2017-10` [Knowledge on the Web](https://github.com/marc1404/papers/blob/master/documents/Knowledge%20on%20the%20Web.pdf)
 - `2018-03` [Technology for Games - Midterm Review Paper](https://github.com/marc1404/papers/blob/master/documents/Technology%20for%20Games%20-%20Midterm%20Review%20Paper.pdf)
 - `2018-03` [Master Thesis Design](https://github.com/marc1404/papers/blob/master/documents/Master%20Thesis%20Design.pdf)
 - `2018-04` [Disposable Sleeves](https://github.com/marc1404/papers/blob/master/documents/Disposable%20Sleeves.pdf)
