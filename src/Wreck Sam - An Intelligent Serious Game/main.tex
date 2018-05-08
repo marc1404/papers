@@ -1,0 +1,46 @@
+\documentclass[sigconf]{acmart}
+
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{rotating}
+\usepackage{afterpage}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{csquotes}
+
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+\pagestyle{plain} % removes running headers
+
+\begin{document}
+
+\title{Wreck Sam: An Intelligent Serious Game}
+\subtitle{Facilitating knowledge through game engagement}
+
+\author{Marc Vornetran}
+
+\affiliation{
+  \institution{University of Amsterdam}
+  \city{Amsterdam} 
+  \country{The Netherlands}
+}
+
+\email{marc.vornetran@gmail.com}
+
+\begin{abstract}
+Preparing for exams and learning in general is hindered when high school students suffer from low motivation and boredom. These problems stem from students feeling disconnected from the study material when it is too abstract, difficult to visualize and not engaging enough. This paper proposes the development of \textit{Wreck Sam} an intelligent, serious game designed to help high school students in the Netherlands learn about the human immune system in the field of Biology. It aims to increase intrinsic motivation and interest in the subject by providing a visual and interactive approach to the topic. The system makes use of a learner model to approximate the student's knowledge in order to progressively introduce new concepts and elements of the immune system. Rather than replacing conventional learning methods the game should be used as a supplementary tool supporting the cognitive learning process. Being designed as a mobile game for smartphones it integrates with the daily life of students and allows them to engage with the topic in their free time.
+\end{abstract}
+
+\keywords{Intelligent Interactive Systems, Education, Serious Games, Mobile Games, Knowledge, Learner Model}
+
+\maketitle
+
+\hyphenation{Macro-phages}
+
+\input{content}
+
+\bibliographystyle{apa}
+\bibliography{mendeley,mendeley-iis-group}
+
+\end{document}

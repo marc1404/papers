@@ -1,0 +1,51 @@
+\section{Method}
+In order to tackle the problem a system has to be devised which consists of four components building on each other.
+Firstly, as the foundation for further work access to the review dataset on RateBeer has to be established.
+This component collects historical reviews while also gathering new reviews being submitted to the site.
+Secondly, summarization techniques will be applied to the acquired beer reviews.
+Triage and evaluation of appropriate techniques will be supported by an initial literature study.
+The summarization and story component is responsible for performing text analysis on the corpora and outputting story generation data.
+Thirdly, the raw summarization and story output should be transformed in a visual representation which strikes a balance between factual and stylistic properties.
+Finally, the last component is used to measure the performance and effectiveness of the system.
+
+\subsection{Data Collection}
+As RateBeer does not publish official datasets of its reviews alternative ways have to be utilized.
+There are a few ways to approach this obstacle.
+
+Using an open dataset\footnote{\url{https://s3.amazonaws.com/demo-datasets/beer_reviews.tar.gz}} with ~1,500,000 entries\footnote{\url{https://github.com/awesomedata/awesome-public-datasets/pull/339}, Accessed: 17-03-2018} can help to kick-start development of other system components while more reviews are collected in the meantime.
+
+The official RateBeer API\footnote{\url{https://www.ratebeer.com/api-documentation.asp}, Accessed: 17-03-2018} is implemented in GraphQL\footnote{\url{https://graphql.org/}} but is not directly suitable for collecting reviews on a large scale.
+It provides an endpoint for retrieving reviews of a beer given the respective ID number.
+Consequently, given a list of beer IDs this endpoint could potentially be used to retrieve reviews in a reliable, structured way.
+The default limitation of 5,000 requests per month and one request per second are an issue to keep in mind.
+Overcoming the API limitations could be possible by contacting RateBeer's operators and discussing if data can be made available more easily with exclusively research purposes in mind.
+In the past a dataset has been made available to researchers from Stanford University\footnote{\url{https://snap.stanford.edu/data/web-RateBeer.html}, Accessed: 17-03-2018} which indicates a chance that a formal request could be successful.
+
+Provided that the previously described approaches are unable to generate a suitable dataset scraping can be used to collect review data.
+This process involves programmatically visiting the website and extracting relevant data from the HTML response.
+In a similar fashion to crawling bots of search engines links have to be discovered to new pages.
+Essentially allowing the program to autonomously discover unknown beers and their respective reviews.
+However, it has to be ensured that the scraping process does not produce high load on the platform or floods it with requests in a rogue manner.
+
+\subsection{Summarization}
+Due to the high number of reviews performing summarization tasks on the full dataset may become unfeasible on consumer devices.
+As a support in this matter access to the Distributed ASCI Supercomputer (DAS) in its fourth generation \cite{Bal2016}.
+Being designed for research areas with heavy demands for computational power and memory it is capable of handling the potentially large review dataset.
+Furthermore, it is a system specifically built for running algorithms in parallel and on distributed nodes with an easy to use interface.
+
+The selection and evaluation of appropriate natural language processing (NLP) techniques for summarization will be one of the primary tasks during the research.
+Therefore, an initial literature study will be conducted to review currently used algorithms which can be deployed in this scenario.
+One approach is to cluster semantic similar reviews into groups before identifying latent topics \cite{Nagwani2015}.
+This second step is called topic modeling which reveals underlying key concepts in text.
+Latent Dirichlet Allocation (LDA) \cite{Blei2003} is regularly, successfully \cite{Nagwani2015, Ren2013} used to generate probability topic models.
+Notably, this approach can be combined with the MapReduce framework \cite{Nagwani2015} which is popular for processing large amounts of data.
+Additionally, it is designed to be executed in parallel on distributed systems such as DAS-4.
+TextRank \cite{Mihalcea2004} is a different algorithm that will be evaluated in this project.
+It creates a graph-based ranking, inspired by web search page ranks, which can be used to extract keywords and summarize text.
+
+\subsection{Evaluation}
+Evaluating the performance and effectiveness of the proposed product summarization system is a challenging task.
+There is no direct ground truth available to compare the generated summary artifacts to.
+Nonetheless, official product descriptions by breweries and content from websites such as the \textit{Brewers Association}\footnote{\url{https://www.brewersassociation.org/}} or \textit{Brewers of Europe}\footnote{\url{http://brewersofeurope.org/}} could potentially be used as comparisons.
+Popular scoring algorithms in the field of text summarization include ROUGE \cite{Lin2004} and the Pyramid Method \cite{Nenkova2004}.
+They have been successfully employed in comparable research projects \cite{Nagwani2015, Ren2013}.

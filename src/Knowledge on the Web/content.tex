@@ -1,0 +1,371 @@
+%!TEX root = main.tex
+% Introduction %
+\section{Introduction}
+Long before the invention of computers humans were accustomed to express knowledge in physical media.
+Primitive examples include cave drawings as a mean to preserve knowledge but also allow others to interpret this representation.
+More sophisticated approaches are books which represent knowledge printed on paper and expressed in a specific natural language.
+Technical advancement allows for the rapid production of books and thereby an increase in available knowledge.
+Having a growing amount of information at hand also requires ways to organise and structure this pool.
+Otherwise accessibility would diminish under an expanding mass of unstructured information.
+Libraries can be seen as a solution to organise books into an intentionally structured collection \cite{Glushko2013a}.
+
+With the invention of computers the era of digitalisation began.
+Knowledge representation is no longer restricted to physical records but more dominantly focuses on the digital context.
+However, a true revolution of knowledge sharing happened due to the widespread adoption and success of the \textit{World Wide Web} (WWW).
+It allows humans to contribute information to a global web while at the same time having this massive information source right at the fingertips at any time.
+Humans are easily able to extract meaningful information from the web by integrating many sources.
+Unfortunately, machines are unable to take the same advantage as loosely coupled, ambiguous and unstructured information is a challenge to process automatically.
+Thus, the Semantic Web sets out to fix this issue.
+It envisions a global web of data which is accessible for both humans and machines.
+
+\begin{displayquote}
+\enquote{Properly designed, the Semantic Web can assist the evolution of human knowledge as a whole.} \cite{Berners-lee2002b}
+\end{displayquote}
+
+This paper covers the groundwork to represent knowledge and subsequently explains how these concepts play fundamental roles in the development of  the Semantic Web.
+The first part, section \ref{organisation-and-representation}, explores the concepts connected to representing knowledge using logic, ontologies and relationships.
+These components are picked up by section \ref{semantic-web} to examine the building blocks of the Semantic Web: RDF, OWL and Linked Data.
+% Introduction %
+
+% Knowledge Organisation & Representation %
+\section{Knowledge Organisation \& Representation} \label{organisation-and-representation}
+
+\subsection{Knowledge Organisation}
+As the amount of information only continues to grow exponentially the organisation of knowledge has become a central task.
+Whereas knowledge was traditionally primarily stored in books and other physical records the invention and widespread adoption of the internet has sparked an era of digitalisation.
+Nowadays both physical and digital resources need to be organised and made accessible.
+
+To name a specific example, non-profit organisations often find themselves on a middle ground between using paper records and digital information management systems \cite{Voida2011b}.
+They often resort to so called \textit{homebrew databases}\cite{Voida2011b} to meet their resource constraints, requirements and workflows.
+Despite having substantial information management needs because of the large amount of volunteers these organisations usually lack the technical expertise or resources for complex and sophisticated systems.
+On one hand this highlights the importance of adequate, efficient knowledge organisation systems but on the other hand also indicates room for improvement in this area.
+
+Another example of this ongoing digital transformation is the \textit{Netherlands Institute for Sound and Vision} in Hilversum.
+It is an archive for over \textit{70\%} of Dutch audiovisual content from 1899 to today.\footnote{\url{http://www.beeldengeluid.nl/en/about}, Accessed: 27-10-2017}
+Their main goal is not merely the preservation of cultural heritage but also organising, categorising and opening up access to the vast catalogue of media content.
+Access is not restricted to a specific target group but rather aimed at a broad range of fields: Education, science, individuals, creative professionals and media or business organisations.
+Furthermore, the institution, as one of the largest in Europe\footnote{\url{https://en.wikipedia.org/wiki/Netherlands_Institute_for_Sound_and_Vision}, Accessed: 27-10-2017}, also founded the \textit{Open Images}\footnote{\url{https://openimages.eu}, Accessed: 28-10-2017} initiative to create a platform for others to consume but also to contribute their own material.
+
+These examples are only a small subset of many organisation systems. They feature the main responsibilities of \textit{Knowledge Organisation Systems (KOS)}: (1) Imposing order and structure on a collection of resources and (2) providing a set of supported interactions \cite{Glushko2013a}.
+Resources hereby can be distinguished into four categories.
+First, a resource is either tangible (physical) or intangible (digital).
+The second division depends on whether a resource is the object itself (primary) or if it holds information about another object (description, meta-data).
+Most of the time, the value of primary resources is enhanced by providing secondary meta-data about them.
+This allows humans and machines to better understand a primary resource and make efficient use of it.
+
+
+\subsection{Knowledge Representations} \label{knowledge-representations}
+Machines require \textit{Knowledge Representations (KR)} as substitutes for real world information in order to be able to solve tasks.
+There are many different forms of these representations: Natural language text (Section \ref{natural-language}), logic (Section \ref{logic}), visual graphics or entries in a database.
+Unstructured information like text and graphics are usually perfectly fit for humans to understand.
+However, computers are better equipped to work with structured information like logic and relational databases.
+Especially logic is the fundamental building block for \textit{reasoning} (Section \ref{reasoning}) in the field of \textit{Artificial Intelligence (AI)}.
+
+According to Davis et al. \cite{Davis1993b} knowledge representations take upon \textit{five} distinct, crucial roles:
+\begin{enumerate}
+\item It is a \textit{surrogate} (substitute) for objects of the real world, thereby not taking direct action but rather using \textit{reasoning} to draw conclusions.
+\item As a \textit{set of ontological commitments} determines how to think about the world.
+\item It is a \textit{fragmentary theory of intelligent reasoning} based on a fundamental mental conception. This reasoning produces sets of inferences which it either recommends or sanctions.
+\item The role of a \textit{medium for pragmatically efficient computation} organising information to produce recommended inferences.
+\item It is a \textit{medium of human expression} or a language in which humans describe the world.
+\end{enumerate}
+Inference, in a broader sense, refers to a logical tool to generate new conclusions based on existing premisses, expressions and facts.
+It is important to keep in mind that knowledge representations are inherently imperfect.
+They are merely a substitute for the entity (tangible, intangible) of the real world.
+The high fidelity of reality cannot be fully captured or even assumptions about reality can be wrong from the beginning.
+This inaccuracy of knowledge representations can lead to erroneous conclusion despite being based on correct reasoning \cite{Davis1993b}.
+
+Although machine learning and statistic techniques have taken a central role in artificial intelligence software Shoham \cite{Shoham2015b} stresses the importance of knowledge representations.
+Applying knowledge representation and philosophy to a problem reveals valuable insights about the problem space and generates a conceptual vocabulary to argue about it.
+Creating a good user experience is not possible or more difficult without a solid internal structure.
+Once this is set, machine learning and statistic algorithms are able to build on top to design a richer user experience \cite{Shoham2015b}.
+
+Furthermore, knowledge representations are heavily used in the process of \textit{Knowledge Modeling}.
+It aims to produce knowledge models which are interpretable by computers.
+Knowledge acquisition could then be deemed to be the extraction and transfer of knowledge from a source, e.g. the mind of a domain expert, to a digital representation.
+However, this is somewhat misleading as internal knowledge cannot be simply accessed and mutated into a different representation; knowledge is not a storable matter \cite{Clancey1989a}.
+The term rather describes the process of developing completely new computer models in a domain which is a creative and difficult task.
+
+In addition to that, the development of computational knowledge representations is further complicated by the \textit{semantic gap}.
+Hein's definition describes it as \enquote{the difference in meaning between constructs formed within different representation systems} \cite{Hein2010a}.
+Representation systems, for example, refer to the translation between natural language (high-level) and formal language (low-level).
+Formalisms in logic (Section \ref{logic}), ontologies (Section \ref{ontologies}) and controlled natural language (Section \ref{natural-language}) can be regarded as means to overcome the semantic gap.
+
+\subsection{Relationships} \label{relationships}
+Hierarchies usually build on \textit{relationships} between the entities within.
+Relations are useful to describe the connections between the parts of an object or larger complex systems.
+There are many different kinds of hierarchical relations, although two of them are commonly used: Aggregation (part of whole) and generalisation (superclass and subclasses).
+
+Odell identifies \textit{six} different types of aggregation which is also referred to as \textit{composition} \cite{Odell1994b}.
+Composition describes the links between parts of an object.
+All parts together form the object itself as a whole.
+The \textit{six} kinds of composition according to Odell \cite{Odell1994b} are as follows:
+\begin{enumerate}
+\item \textit{Component-integral object composition:} The configuration of the parts is essential for the function and structure of the object they support. Parts are separate objects of their own but they must be well arranged with each other to form the overall entity. \textit{(Example: A display is part of a smartphone)}
+\item \textit{Material-object composition:} Invariant version of the previous composition. Parts of the object cannot be removed. They are what an object is made of. \textit{(Example: Coca-Cola is partly water)}
+\item \textit{Portion-object composition:} Parts of the object are of the same kind as the composition itself. The chunks are homeomeric. \textit{(Example: A drop of water is still water)}
+\item \textit{Place-area composition:} Invariant version of the previous composition. Homeomeric pieces of the object cannot be removed. \textit{(Example: Amsterdam is part of The Netherlands)}
+\item \textit{Member-bunch composition:} Parts of the object belong to a collection. They bear no functional or structural relationship to each other. \textit{(Example: A drop of water is part of rain)}
+\item \textit{Member-partnership composition:} Invariant version of the previous composition. Members of the partnership cannot be removed without terminating it. \textit{(Example: Two partners form a marriage)}
+\end{enumerate}
+Winston et al. \cite{Winston1987a} define \textit{three} distinctive properties to determine the type of composition:
+\begin{enumerate}
+\item \textit{Configuration} states whether parts of the object have a functional or structural meaning towards each other (Composition 1 - 4).
+\item \textit{Homeomerous} parts are of the same kind as the object they form (Composition 3 \& 4).
+\item \textit{Invariance} declares that parts of the object cannot be removed without terminating the composition (Composition 2, 4 \& 6).
+\end{enumerate}
+
+Clearly defining the type of relationship between entities is especially useful for creating \textit{Ontologies} (Section \ref{ontologies}) and also relevant for \textit{Linked Data} (Section \ref{linked-data} in the \textit{Semantic Web} (Section \ref{semantic-web}).
+
+\subsection{Logic} \label{logic}
+\textit{Logic} is concerned with the correct and valid principles of reasoning.
+The human psychology behind reasoning is a different field of study.
+It is based on premises, conclusions and inference.
+Inference, in a broader sense, is the step of drawing conclusions from a set of premises.
+The formal and structured nature of logic enables machines to automatically execute different types of inference tasks.
+This is a central responsibility of knowledge-based systems.
+They can be used to verify the consistency of argument chains, autonomously answer questions (See also Section \ref{reasoning}) or conduct deductive reasoning (generation of new conclusions).
+Furthermore, formal logic definitions are a part of reusable and shareable ontology (Section \ref{ontologies}) specifications.
+
+A set of premises and a conclusion form an \textit{argument}.
+The argument is considered to be \textit{valid} if it is impossible for all premises to be \textit{true} and the conclusion to be \textit{false} \cite{HarryJ.Gensler1954b}.
+It does not matter if the premises of an argument are true for it to be valid.
+
+However, a \textit{sound} argument is valid and also requires its premises to be \textit{true}.
+Proving a sound argument involves checking all premises to be correct and whether the conclusion follows the premises. \\
+
+\begin{tabular}{c c}
+\textbf{Valid argument} & \textbf{Sound argument} \\
+\shortstack[l]{
+All humans like dogs. \\
+Humans who like dogs are friendly. \\
+Therefore, all humans are friendly.
+}
+&
+\shortstack[l]{
+Breathing means you are alive. \\
+You are breathing. \\
+Therefore, you are alive.
+}
+\end{tabular} \\
+
+The previous examples are written using quantified \textit{syllogisms} (hence the \enquote{all} keyword). This simple logic notation dates back to the definition by Aristotle in around 350 B.C.
+There are more formalisms and notations which vary in their expressiveness, complexity, decidability and efficiency.
+Formalisms should be selected depending on their characteristics and the intended usage context.
+The following list is ordered going from very simple to complex:
+
+\begin{itemize}
+\item Propositional logic (inexpressive, simple, decidable \& efficient)
+\item Syllogisms
+\item Description Logic, OWL (See also Section \ref{semantic-web})
+\item First-order logic
+\item Higher-order logic (expressive, complex, undecidable \& inefficient)
+\end{itemize}
+
+Nowadays \textit{first-order logic} is the most commonly used formalism and acts as the core for modern logic \cite{Ferreiros2001a}.
+
+\subsection{Ontologies} \label{ontologies}
+The preceding section introduces logic formalisms as a way to reason about the world.
+While this enables reasoning in software it lacks a formal specification to share and reuse knowledge in a domain.
+\textit{Ontologies} are designed to be a solution for this problem by defining a collection of terms and their relationships \cite{Berners-lee2002b}.
+Philosophy describes an ontology as the theory of what exists in reality.
+Information technology uses ontologies as specification documents for a hierarchy of terms.
+Usually ontologies contain a taxonomy including inference rules.
+The taxonomy defines classes of objects in a hierarchy using relations (See also Section \ref{relationships}).
+Classes have a set of properties associated with them.
+Their corresponding subclasses inherit these properties and may extend the superclass \cite{Berners-lee2002b}.
+
+Designing ontologies is a creative process usually performed by humans.
+In order to create ontologies for knowledge sharing and interoperability design decisions should be based on objective criteria and not subjectiveness \cite{Gruber1995b}.
+Gruber \cite{Gruber1995b} proposes \textit{five} principles for designing ontologies:
+
+\begin{enumerate}
+\item \textit{Clarity:} Definitions of terms should be objective and as complete as possible. If possible a representation in logic formalisms should be preferred. Documentation for definitions should be provided in natural language.
+\item \textit{Coherence:} Inferences should be consistent with the definitions, as well as the underlying axioms. Coherence also applies to documentation in natural language.
+\item \textit{Extendibility:} An ontology should anticipate the use of shared vocabulary. It should be possible to extend and specialise an ontology without altering the existing definitions.
+\item \textit{Minimal encoding bias:} The dependency on specific symbol-level encoding should be avoided. Design choices should not be based on notation convenience or ease of implementation.
+\item \textit{Minimal ontological commitment:} Ontological commitment (See also Section \ref{knowledge-representations}) should be kept at a minimum. The amount of claims about the world being modeled should be the lowest number still sufficient for support. In other words, the ontology should contain only essential assumptions about the world.
+\end{enumerate}
+
+The provided principles act as a foundation for designing shareable and reusable ontologies in knowledge-based systems.
+Nevertheless, Gruber \cite{Gruber1995b} points out that the nature of design processes involves making compromises between criteria.
+However, not all goals are mutually exclusive and can still be useful to guide the definition of ontologies.
+
+\subsection{Knowledge Generation}
+\textit{Knowledge Generation} can be divided into formal research and informal activities or interactions between humans \cite{NationalResearchCouncil2014a}.
+Both types involve external acquisition and internal creation of knowledge\footnote{\url{https://www.igi-global.com/dictionary/knowledge-generation/45440}, Accessed: 29-10-2017}.
+
+The following sections focus on \textit{two} specific applications of knowledge generation.
+First, \textit{Reasoning} (Section \ref{reasoning}) is heavily used in the \textit{DeepQA} (QA = Question Answering) architecture designed by researchers at IBM.
+Second, \textit{Crowdsourcing} (Section \ref{crowdsourcing}) is an alternative approach to question answering.
+It utilises wisdom of crowds for reducing errors in decision making.
+
+\subsubsection{Reasoning} \label{reasoning}
+Ferrucci et al. \cite{Ferrucci2010b} describe how they, as researchers at IBM, set out to develop an architecture for \textit{Question Answering (QA)}.
+The overall architecture is named \textit{DeepQA} and the concrete implementation gained popularity as \textit{Watson}.
+Waton's goal is to compete in the U.S. quiz show \textit{\enquote{Jeopardy!}} as a real-time, digital contestant.
+Participants of the TV show have to answer questions in broad general knowledge while also responding fast.
+As the contestants are usually humans questions are formulated in natural language (Section \ref{natural-language}) which is difficult to understand for machines.
+
+The paper \textit{Building Watson} \cite{Ferrucci2010b} states that combining various techniques, algorithms and implementations for tackling the challenges led to better performance than committing to a single, specific solution.
+Challenges include: Natural language processing, source identification, hypothesis generation, ranking and finally scoring.
+Deploying large-scale parallelism allows the system to evaluate multiple interpretations and hypotheses in a short amount of time.
+One of the most important design decisions is the use of probabilities and confidence.
+Watson evaluates a wide range of question interpretations and a large number of hypotheses.
+It bases its evaluation on shallow and deep knowledge; not restricting itself to a subset.
+Components of the system do not commit to answers which could lead to missed correct evaluation paths.
+Confidence scores are attached to question interpretation and follow up answers.
+
+After \textit{three} years of research and development Watson is able to compete at human expert level \cite{Ferrucci2010b}.
+Rapid experimential prototyping and constant, thorough evaluation of the components performance is a key strategy leading to the success of the platform.
+
+\subsubsection{Crowdsourcing} \label{crowdsourcing}
+utilises \textit{human computing} to answer questions and solve tasks which machines may be unable to.
+The term \textit{human computation} was coined by Luis von Ahn \cite{Law2005HumanComputation} and regards human brains as processors in a distributed system.
+Each brain solves small parts of a larger computational task at hand.
+It is a useful technique for decision making by using the majority answer in crowds to reduce the chance of errors.
+
+\textit{CrowdTruth}\footnote{\url{http://crowdtruth.org}, Accessed: 29-10-2017} is a framework for crowdsourcing ground truth data with a focus on \textit{gold standard} data in medical applications.
+Gold standard refers to the best available data under given conditions \cite{Versi1992a}.
+The project is developed in collaboration between researchers from the Network Institute\footnote{\url{http://www.networkinstitute.org}, Accessed: 29-10-2017} of \enquote{Vrije Universiteit (VU)} Amsterdam and IBM Netherlands\footnote{\url{https://www.ibm.com/planetwide/nl/}, Accessed: 29-10-2017}.
+
+\textit{Two} researchers of the projects team, Lora Aroyo and Chris Welty, identity and debunk \textit{seven} myths in the field of crowdsourcing in their paper \textit{Truth is a Lie} \cite{Aroyo2015a}.
+They reject the fallacy of an ideal single truth.
+As a result \textit{crowd truth} is proposed which captures human subjectiveness and a range of valid interpretations.
+% Knowledge Organisation & Representation %
+
+% Semantic Web %
+\section{Semantic Web} \label{semantic-web}
+The world wide web has revolutionised the ability of humans to access and share knowledge on a global scale.
+However, computers are only able to parse the content of web pages on a technical level.
+While humans can answer questions using single queries or combining multiple ones machines get stuck when trying to retrieve meaning from web pages.
+The \textit{Semantic Web} aims to evolve the current web into a state where both humans and machines can autonomously carry out sophisticated tasks \cite{Berners-lee2002b}.
+It is therefore not a separate web but rather the next evolutionary step which allows to embed and express meaning.
+This enables the potential for a shift in responsibility from the user to intelligent software agents.
+These agents would be able to carry out complex queries on their own and presenting meaningful information to users.
+
+Horrocks \cite{Horrocks2003b} also criticises this deficit in the current web.
+Despite all the necessary information being available it requires integrating multiple sources.
+Current solutions are usually specific software solutions customised for a problem.
+He identifies the focus of content presentation as one of the main obstacles for the Semantic Web to overcome.
+Most information is unstructured and not explicitly linked to other resources.
+
+The \textit{World Wide Web Consortium} (W3C)\footnote{\url{https://www.w3.org}, Accessed: 30-10-2017} is responsible for developing open web standards.
+They introduced the \textit{Resource Description Framework} (RDF)\footnote{\url{https://www.w3.org/standards/techs/rdf\#w3c_all}, Accessed: 30-10-2017} as a simple yet flexible language for describing resources and their relationships on the web \cite{Horrocks2003b}.
+One of its key feature is the usage of \textit{Internationalized Resource Identifiers} (IRI)\footnote{\url{https://www.ietf.org/rfc/rfc3987.txt}, Accessed: 30-10-2017} to reference other resources.
+This mechanism is related to hyperlinks, also called \textit{Uniform Resource Locators} (URL), which allow the navigation between different web pages.
+RDF itself is a labeled, directed graph built using triples \cite{Horrocks2003b}.
+Triples consist of \textit{three} components: (1) subject, (2) predicate and (3) object.
+The predicate describes a binary relationship between the subject and object.
+
+While RDF is a rather simple ontology language it is inherently limited in its capabilities by design.
+The Semantic Web community recognised the need for more expressive ontologies and thus the \textit{Web Ontology Language} (OWL)\footnote{\url{https://www.w3.org/standards/techs/owl\#w3c_all}, Accessed: 30-10-2017} was created.
+OWL adds richer semantics to RDF resources using schemas.
+It allows detailed description of classes and their corresponding properties. 
+Being based on Description Logic (Section \ref{logic}) it also includes mechanisms to add restrictions to classes, properties and relationships.
+
+Berners-Lee \cite{Berners-lee2002b} as well as Heath and Bizer \cite{Heath2011b} argue that \textit{Linked Data} (Section \ref{linked-data}) is the true strength of the Semantic Web.
+Providing structured data, opening access to it and linking it to other data resources transforms the web into a global web of data.
+With an emphasis on being usable not only by humans but also by intelligent software agents in a meaningful way.
+
+\subsection{Linked Data} \label{linked-data}
+In a consolidated effort by Google, Microsoft, Yahoo and Yandex the platform \textit{Schema.org}\footnote{\url{http://schema.org}, Accessed: 30-10-2017} was founded.
+The goal is to define, maintain and promote reusable vocabularies for structured data on the web.
+Guha et al. \cite{Guha2015b} analyse the history of structured data and identify \textit{three} goals for future standardisation efforts:
+
+\begin{enumerate}
+\item \textit{Easy participation:} Publishers and developers should be able to participate without compromising existing tools and workflows. Complexity should stay with the smallest amount of users.
+\item \textit{Avoid long specifications:} Good documentation is essential for widespread adoption. Especially examples can be useful as recipes to start out.
+\item \textit{Incremental complexity:} Complexity should increase progressively alongside adoption trends. If the need arises more complex layers can be added over time.
+\end{enumerate}
+
+\textit{Wikipedia}\footnote{\url{https://www.wikipedia.org}, Accessed: 30-10-2017} is easily one of the most popular knowledge bases on the web.
+It makes extensive use of crowdsourcing (Section \ref{crowdsourcing}) to gather knowledge spanning all topics in various languages.
+While it may not be visible on the surface \textit{two} projects aim to enable the potential of Wikipedia as a source for Linked Data \cite{Vrandecic2014b}.
+
+\textit{Wikidata}\footnote{\url{https://www.wikidata.org/wiki/Wikidata:Main_Page}, Accessed: 30-10-2017} acts as the central storage of structured data for Wikipedia.
+The projects purpose is to extract and store structure data from Wikipedia which is otherwise scattered in multiple articles and duplicated in many languages \cite{Vrandecic2014b}. 
+In return Wikipedia can access Wikidata as a repository to display information.
+Furthermore, this platform also allows machines to make efficient use of its knowledge.
+
+Another effort to build the open web of data is \textit{DBpedia}\footnote{\url{http://wiki.dbpedia.org}, Accessed: 30-10-2017}.
+Similar to Wikidata it is a crowdsourced attempt to extract structured data from Wikipedia and making it available on the web \cite{Bizer2009b}.
+All entries can be dereferenced using their globally unique identifier. 
+This results in a detailed RDF representation which applications utilise to provide meaningful information to their users.
+
+Despite strong community efforts to build an open web of linked data Beek et al. \cite{If2016b} state that the current Semantic Web falls short to meet the initial goals.
+It is not yet machine-processable nor are applications able to autonomously traverse it and access different sources.
+They propose a fundamentally different approach for realising these goals called \textit{LOD Laundromat}\footnote{\url{http://lodlaundromat.org}, Accessed: 30-10-2017}.
+In contrast to the Semantic Web's nature it acts as a centralised hub for querying cleaned, structured data.
+
+\subsection{User Requirements}
+Benson and Karger \cite{Benson2014b} conducted research on how end-users publish data on the web.
+They differentiate between needs of expert and novice users. 
+Current standards, like RDF and OWL (Section \ref{semantic-web}), are of technical nature and better suited for professional developers and engineers.
+Looking back at the goals layed out by Guha et al. \cite{Guha2015b} (Section \ref{linked-data}) these tools do not necessarily meet the requirements of easy participation and incremental complexity.
+Their research finds that novice data authors are stuck with either publishing their data as unstructured text (e.g. blogs, wikis) or handing it over to big companies (e.g. Epicurious, Facebook) which transform it into a rich browsing experience \cite{Benson2014b}.
+Furthermore, the study explores the JavaScript\footnote{\url{https://developer.mozilla.org/en-US/docs/Web/JavaScript}, Accessed: 30-10-2017} framework \textit{Exhibit}\footnote{\url{http://www.simile-widgets.org/exhibit/}, Accessed: 30-10-2017} as a tool to publish interactive, structure data visualisations on the web.
+Exhibit's focus lays on allowing all end-users, regardless of their technical background, to contribute their data to the Semantic Web.
+
+\subsection{Natural Language} \label{natural-language}
+The majority of the web's presentational content is written in natural language as it is intended to be consumed by humans.
+Computers are currently unable to easily extract meaning from content in natural language because of the complexity and ambiguity involved.
+However, automated semantic analysis is possible using \textit{Controlled Natural Languages} (CNL).
+A single, succinct definition for CNL does not exist.
+Kuhn \cite{Kuhn2013ALanguages} describes CNL as a constructed language based on \textit{one} natural language.
+It is more restrictive in terms of the lexicon, syntax and semantics.
+Most natural properties are preserved to strike a middle ground in usability for humans and machines.
+
+\textit{AceWiki}\footnote{\url{http://attempto.ifi.uzh.ch/acewiki/}, Accessed: 30-10-2017} is a semantic wiki prototype built around the use of CNL.
+Contributors are able to formulate statements in \textit{Attempto Controlled English} (ACE) \cite{Kuhn2009AceWiki:Wiki}.
+This subset of natural English is automatically processable by the system but provides a shallow learning curve for users.
+As a result AceWiki allows the creation of a semantic knowledge base without requiring deep expertise in the Semantic Web.
+
+Another approach to solve the challenge of natural language for machines is \textit{WordNet}\footnote{\url{https://wordnet.princeton.edu}, Accessed: 30-10-2017}.
+It is a lexical database for English collecting words and their associated meaning \cite{Miller1995b}.
+Sets of synonyms are linked through semantic relations thereby determining word definitions.
+In its core WordNet aims to solve the challenge of \textit{polysemous} words for systems processing natural language \cite{Miller1995b}.
+Polysemous words have more than \textit{one} meaning (Poly: Greek \enquote{many}\footnote{\url{http://www.dictionary.com/browse/poly-}, Accessed: 30-10-2017}) which requires computers to understand the author's intended meaning.
+
+\subsection{Provenance}
+Facilitating shared knowledge through the Semantic Web has resulted in a need for \textit{Provenance}.
+The paper by Moreau and Groth \cite{Moreau2013b} examines \textit{four} use cases: (1) Quality assessment, (2) compliance, (3) cataloguing and (4) replay.
+
+First, \textit{quality assessment}, as the name implies, is concerned with measuring content quality according to a range of criteria: Trustworthiness, careful research, use of expert knowledge and whether it is based on correct information.
+Second, \textit{compliance} deals with the acquisition and production of data following a set of rules and guidelines.
+Third, \textit{cataloguing} refers to the organisation of information to make it both accessible and reusable.
+Finally, \textit{replay} describes the usefulness of having an organisational memory.
+This would allow the reproduction of data processes to find flaws or errors.
+
+\subsection{Web Search}
+Searching on the web is commonly solved using a keyword-based input and presenting a list of results to the user.
+For a long time the results were displayed as a primitive collection of links.
+The collection is ordered according to internal relevance algorithms of search engines.
+In some cases (e.g. Google\footnote{\url{https://google.com}, Accessed: 30-10-2017}) links from advertisers take precedence to generate revenue.
+
+Cross-company research by Haas et al. \cite{Haas2011b} from Microsoft, Yahoo and Facebook shows that users prefer enhanced search results and even attribute more relevance to these elements.
+Enhanced hereby refers to the integration of images, videos, further links, key-value pairs of data and other interactive elements into search results.
+This is possible by performing information extraction using Semantic Web techniques.
+Their research also indicates that efficient generation of enhanced search results is achievable while also having a meaningful impact in terms of user impressions.
+Despite structured information being scarcely scattered across the web the majority of user queries focusses on search results with a high potential for enhancement \cite{Haas2011b}.
+% Semantic Web %
+
+% Conclusion %
+\section{Conclusion}
+The Semantic Web builds on concepts from knowledge representation which have been researched even before Tim Berners-Lee \cite{Berners-lee2002b} envisioned it.
+Both RDF and OWL are languages to create and share ontologies (Section \ref{ontologies}) on the web.
+OWL is meant to overcome the limitations of RDF having its basis in description logic (Section \ref{logic}) and forming relationship hierarchies (Section \ref{relationships}).
+
+A lot of time and resources have been spent by communities, researchers and companies to achieve the goals of the Semantic Web.
+Projects like Schema.org \cite{Guha2015b} aim to provide consolidated vocabularies for providing structured data.
+Wikidata \cite{Vrandecic2014b} and DBpedia \cite{Bizer2009b}, as large pillars of the linked open data cloud, reuse these vocabularies to allow intelligent software agents to extract meaning from the global web of data.
+
+However, the true potential of the Semantic Web has not been unlocked yet. 
+Different user requirements between novice and expert target groups pose a challenge.
+Large parts of the web are still dominated by natural language and unstructured information which machines naturally struggle with.
+It is rather difficult to foresee what kind of applications and new possibilities would result out of the existence of a global, structured web. 
+Early signs, like enhanced search results \cite{Haas2011b} and Watson of the DeepQA platform \cite{Ferrucci2010b}, showcase the power behind semantic technologies.
+
+A truly Semantic Web where both humans and machines are able to carry out sophisticated tasks with minimal effort would benefit the human race itself.
+Building a global knowledge web, which does not discriminate between its users, should be the primary rationale to advance the state of the world.
+% Conclusion %

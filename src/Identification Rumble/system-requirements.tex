@@ -1,0 +1,46 @@
+% !TEX root = ./setup.tex
+
+\subsection{System Requirements}
+This project design poses a set of requirements for both the museum and its visitors.
+For visitors, these requirements are mainly focused on the interactive procedure of going through the exhibition from beginning to end.
+In order to realize the project, the museum has to meet administrative and technical prerequisites.
+These requirements will be discussed from separate perspectives in the following sections.
+
+
+\subsubsection{Visitor Requirements}
+Visitors are able to pick up an identity card replica, containing an RFID tag, at the entry of the museum.
+This is precisely where the museum already hands out audio tour devices.
+It should be made clear that the identity card is the only item they need to interact with the exhibition during their visit.
+Additional explanations are not necessary which is in line with the initial stakeholder's guidelines.
+Naturally, visitors are expected to return their identity card at a designated collection point before leaving the museum.
+
+When interacting with different stations of the exhibition visitors should understand the main interaction of holding their identity card to scanner points.
+Holding an identity card within the proximity of an RFID reader is the central action carried through the exhibition.
+It either triggers the start of a station or signifies confirmation of a choice made by the visitor.
+In addition to that, visitors need to recognize interaction points or namely where identity cards will be recognized.
+Understanding this interaction will be supported by visual aids near interaction points and audiovisual feedback from stations.
+
+
+\subsubsection{Museum Requirements}
+The museum has to build props (identity cards), acquire necessary hardware (stations), setup software system and produce digital material (dilemma animations) to realize the project.
+
+Identity cards are set together by equipping a physical replica with an RFID tag.
+Therefore, custom replicas have to be assembled mimicking the look and haptic of identity cards used during WWII.
+Quality of these props can range from simple paper printouts to elaborate duplicates using leather covers.
+This can be made dependant on the available budget.
+On the technical side, RFID tags are easily acquired through local or online retail businesses.
+
+Each station requires a specific hardware setup including RFID readers, screens and computers.
+Language choice is backed by a single computer connected to an RFID reader per supported language of the museum.
+Dilemma stations rely on a screen for playing their respective animation, a computer and an RFID reader per answer of the dilemma.
+The evaluation station consists of a screen, computer and single RFID reader recognizing visitors with their identity card.
+
+As the stations are at different locations within the museum one backend server acts as the communication hub.
+This server needs to be setup one time by pulling the project's repository\footnote{\url{https://github.com/marc1404/identification-rumble}, Accessed: 09-02-2018} and installing Node.js\footnote{\url{https://nodejs.org/en/}, Accessed: 09-02-2018} as the runtime framework.
+Needless to say, it should be kept running to render the exhibition stations usable and administrative interfaces available.
+In order to connect the stations to the server, an internal network has to be provided.
+It is not advisable to open the server to the public internet as this would open it up to malicious attacks.
+
+Finally, each dilemma features an animated video with audio which guides visitors through the scenario.
+These clips have to be produced from a technical side but also require voice actors to record narration and dialogue.
+Furthermore, they should be available in all languages which the museum seeks to offer the exhibition in.

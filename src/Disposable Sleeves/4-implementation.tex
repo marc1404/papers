@@ -1,0 +1,18 @@
+\section{Technical Implementation} \label{sec:implementation}
+
+Disposable Sleeves is created using the Unity\footnote{\url{https://unity3d.com}, accessed 29-03-2018} development platform.
+It is a 3D real-time multiplayer game aimed at the desktop operating systems Windows and macOS.
+Primitive shapes provide the basic structure of the environment.
+A range of free assets from Unity's store are used for: styling the level in a dark dungeon theme, the two player models, lighting models, and traps.
+The assets can be retrieved from the store using the following keywords: MK Glass, Adam Character Pack, Dungeon Ground, Modular Medieval Lanterns, Outline Effect, Dungeon Traps, Skull Platform, and Standard Assets.
+
+Global illumination is disabled in order to fully rely on the light sources placed within the level.
+This creates a dark feeling which matches the dystopian style of Altered Carbon.
+Animations for the spawn gate, trap levers and traps themselves are designed using the Unity animation editor.
+Additionally, the existing assets are heavily customized to serve their specific purpose in the envisioned gameplay.
+
+Finally, the largest chunk of time was consumed by the implementation of the networking code.
+Unity provides the UNet high-level scripting API (HLAPI)\footnote{\url{https://docs.unity3d.com/Manual/UNetReference.html}, accessed 29-03-2018} to cover the basic requirements in multiplayer games.
+However, implementing smooth player movement and synchronizing game state is a demanding task in any case.
+In its current form, the game is fully functional to be played by multiple concurrent players.
+Preferably game sessions should be held in a local area network (LAN) to minimize delays.

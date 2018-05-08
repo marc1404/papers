@@ -1,0 +1,74 @@
+\section{Artificial Intelligence in Games} \label{sec:ai}
+In their paper Yannakakis and Togelius (2015) \cite{Yannakakis2015} establish a taxonomy of ten different fields within artificial intelligence (AI) in games.
+This overview helps to gain an understanding of the current research state and highlights interaction between fields.
+Furthermore, it emphasizes potential interconnections which bear the potential to progress connected fields if further explored.
+
+\subsection{NPC Behavior Learning} \label{sec:npc-behavior-learning}
+Teaching non-player characters (NPCs) to perform well in a game can be understood as a reinforcement problem.
+Naturally, games feature measurements (e.g. score, time) useful for determining whether a learning algorithm is performing good.
+The field of NPC behavior learning influences other AI areas to a large extent: Player modeling aims to mimic the style of players which benefits from the same learning algorithm, better NPC AI algorithms push the development of new game benchmarks matching their performance, and testing of procedural generated content can be automated by using capable AI.
+
+\subsection{Search and Planning} \label{sec:search-and-planning}
+Search algorithms from computer science are commonly applied to pathfinding problems or searching the decision space of games with a high magnitude of branching.
+
+Porteous et al. (2010) \cite{Porteous2010} introduce an interesting application of planning on interactive storytelling (Section \ref{sec:story}).
+Their AI planning aims to solve narrative generation using novel state constraints.
+It overcomes the issue of controlling the shape of generated narratives using these constraints while also maintaining real-time performance.
+Consequently they defined the following requirements for planning in interactive storytelling, planners need to: (1) Perform in real-time, (2) derive planning criteria from constraints, (3) support interactivity, and (4) are able to reason about narrative knowledge.
+Building the planning around domain-specific knowledge helps to solve problems in a more efficient manner.
+Specifying constraints around this domain allows authors to control which situations are crucial for the narrative.
+Firstly, a baseline linear plot is constructed along with a set of basic, generic actions (planning operators).
+Each character has a different point of view (PoV) and a varying set of available actions.
+Identifying the plot for each character in respect to PoV and actions transformed the basline into a nonlinear plot.
+Interacting with the narrative changes facts about the worlds which triggers the engine to search for different storylines according to the declared constraints.
+
+\subsection{Player Modeling}
+The field of player modeling is concerned with creating machine learning (ML) models detecting how players experience games and their resulting emotional change.
+Identifying archetypes of players is then an example application of unsupervised clustering to detect groups.
+Being able to model players is beneficial for both procedural content generation and computationally generated narratives to create personalized content and scenarios.
+
+\subsection{Games as AI Benchmarks}
+When games or parts of them are used as benchmarks they provide an interface which allows external systems to measure the performance of the AI under test.
+Commonly annual or ongoing competitions are held around AI benchmarks pushing development in the field.
+Benchmarks are an essential tool to measure and compare the performance of competing AI systems.
+It is therefore crucial to build quality benchmarks to progress the research of AI in games as a whole.
+However, creating too narrow benchmarks involves the risk of focusing effort on specific problems.
+Instead AI should become better at solving general problems.
+
+\subsection{Procedural Content Generation}
+Procedural content generation (PCG) is concerned with the automatic or semi-automatic generation of any game content.
+Among others, generating levels or stories are only two examples for PCG.
+There is a close interconnection between PCG and the field of NPC behavior learning (Section \ref{sec:npc-behavior-learning}).
+In order to generalize well and perform good in unseen environments AI controlled NPCs can used procedural generated levels to test their abilities.
+Using automated NPCs to play generated levels is in turn a way to check if a level is solvable.
+
+\subsection{Computational Narrative}
+Representational and generational aspects are part of the computational narrative.
+Stories are essential for shaping the aesthetics of a game.
+The main questions of this field revolve around how to represent narratives and how AI can take part in generating their sequence.
+As discussed in the paper by Porteous et al. \cite{Porteous2010} planning influences computational narrative.
+It enables the generation of multiple variants while obeying constraints defined by the story authors.
+
+\subsection{Believable Agents}
+Any game featuring NPCs is usually interested in improving the believability of its agents.
+They have to express certain human-like characteristics towards players in order to be taken seriously.
+Prominent competitions like the 2k BotPrize are essentially turing tests for imitating gameplay of human players.
+The commercial game industry is especially interested in creating more believable agents as it allows for more immersive virtual worlds.
+
+\subsection{AI-assisted game design}
+The area of AI-assisted game design carries potential for progression of the field and creating benefits for other research areas.
+It focuses on the development of AI-powered tools assisting in the design and development process of games.
+Specifically the creation of levels, complete maps, mechanics and narratives can be supported by AI tooling.
+
+\subsection{General Game AI}
+Researchers have established the field of artificial general intelligence (AGI) in recent years which aims to progress AI towards human-level domain-independent intelligence.
+Similarly game playing AI agents should be capable to play various kinds of games with only an initial learning phase.
+The annual General Game Playing Competition tests agents on rather restricted variants of games with perfect information and discrete state.
+Progress has been made to test agents on 2D videogames which are described using the Video Game Description Language specifically designed for this purpose.
+
+\subsection{AI in commercial games}
+There are disjoint efforts between academic research and the commercial game industry when working on AI in games.
+This is partly due to each group being interested in solving different problems.
+Researchers are focused on general, deep problems whereas commercial games only require AI for improving the player's experience.
+However, it would be beneficial for both groups to work towards closing this gap.
+The use of AI in commercial games provides constant input for research and AI techniques from academia have regularly found application in published, successful games.

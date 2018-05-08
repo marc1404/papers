@@ -1,0 +1,42 @@
+\section{Problem Statement}
+The widespread adoption of e-commerce has established consumer generated reviews and ratings of products as a standard feature on merchant websites.
+These reviews provide guidance for potential new customers and help to meet their expectations after receiving an ordered product.
+Besides creating a knowledge database for consumers reviews contain valuable insights and measurements for both merchants and producers.
+While not every single customer authors a review especially popular products amass numerous reviews on large marketplaces during their life cycle.
+Reviews themselves differ in length, level of detail, quality of writing, structure, language and opinion features \cite{Hu2004a}.
+
+However, e-commerce platforms of producers, merchants and large scale retailers by no means the only place for users to express their opinion about products.
+Review aggregation sites collect user reviews about products and services as a third-part which does not offer or provide the reviewed subjects themselves.
+Well established household names include: Metacritic\footnote{\url{http://www.metacritic.com/}} (entertainment), Rotten Tomatoes\footnote{\url{https://www.rottentomatoes.com/}} (movies, tv), IMDb\footnote{\url{http://www.imdb.com/}} (movies, tv, actors) and TripAdvisor\footnote{\url{https://www.tripadvisor.com/}} (vacation, flights, restaurants).
+Aggregators act as independent platforms where users can find averaged reviews in a uniform fashion.
+
+As a more specific instance with a much more narrow focus RateBeer\footnote{\url{https://www.ratebeer.com/}} collects information about (craft) beer and primarily consumer generated reviews of beers and breweries.
+Established in 2000 it has since remained a popular exchange platform garnering more than five million reviews in total\footnote{\url{https://www.ratebeer.com/RateBeerBest/default_2013.asp}, Accessed: 16-03-2018} with a rate of roughly one million reviews per year since 2016\footnote{\url{https://www.ratebeer.com/ratebeerbest/default_2016.asp}, Accessed: 16-03-2018}.
+While more recent and exact figures remain hidden it is estimated that nearly 500,000 visitors view the site within one month\footnote{\url{https://www.similarweb.com/website/ratebeer.com}, Accessed: 16-03-2018}.
+Due to a number of factors RateBeer will be used as a testbed for this thesis project.
+First, the large quantity of historic reviews and constant stream of new content provides an abundance of data for processing and experimental testing.
+Second, according to RateBeer's quality assurance principles low quality and nonsense entries are swiftly removed from the platform through an extensive administration system.
+Furthermore, although Anheuser-Busch InBev acquired a minority stake of RateBeer\footnote{\url{https://www.nytimes.com/2017/06/18/business/media/anheuser-busch-inbev-ratebeer.html}, Accessed: 16-03-2018} the site claims and emphasizes its mission to remain an independent platform which prohibits ratings by breweries and their affiliates.
+Third, reviews are of a semi-structured nature containing free text but also scaled ratings in five distinct categories: (1) aroma, (2) appearance, (3) taste, (4) palate, and (5) overall.
+Finally, being an international aggregator the site displays the location (city, country) of reviews when they were published by their authors.
+This allows to perform analysis scoped to specific cities, regions or countries.
+
+With an abundance of reviews at hand readers are easily overwhelmed by the sheer number of expressed opinions, and thus extracting meaningful information becomes a challenging task.
+Existing solutions to this problem focus on different aspects in their summarization process.
+In feature-based summaries \cite{Hu2004} product features are extracted and reviews are classified according to their sentiment towards these features.
+This approach aims to reduce opinion bias when only a subset of reviews is read.
+Similarly, this goal can also be achieved by ranking a set of questions about a product and matching reviews that are able to answer their respective question \cite{Liu2017}.
+As other research has pointed out \cite{Liu2017, Al-Dhelaan2017} diversification is an important and sometimes overlooked characteristic of review summarization.
+Besides including representative reviews into the summary diverse sentiments and aspects should be included as well.
+
+Bearing this in mind, the summarization problem can be approached with a wider scope taking into account the dominance of social multimedia \cite{B2018a}.
+The authors argue that summarization should be revisited in the light of modern multimedia to connect research areas which have been working in isolation from each other.
+In order to meet today's information needs of users tapping single media sources is not sufficient anymore.
+This allows to derive the following question which should lead this research project:
+
+\noindent
+\emph{How to generate representative and diverse product story summarizations driven by user generated reviews?}
+
+As mentioned before RateBeer will act as a testbed for this experimental exploration.
+It provides user generated reviews for a large quantity of beers (products) and enables the possibility to apply the story generation to breweries and regions as well.
+The research will take other media sources into consideration such as further text or image content from social media or video advertisement which could be incorporated into the generated narrative.

@@ -1,0 +1,23 @@
+\begin{table}[!ht]
+\begin{tabular}{ l l p{8cm} }
+\hline
+\emph{Name} & \emph{Type} & \emph{Description} \\
+\hline
+Year & Integer & Year the export or import occurred \\ \hline
+Appendix & String & Varying from I to III. I is most protected, III the least. \\ \hline 
+Taxon & String & The species' taxonomic taxon \\ \hline 
+Class & String & The species' taxonomic class \\ \hline 
+Order & String & The species' taxonomic order \\ \hline 
+Family & String & The species' taxonomic family \\ \hline 
+Genus & String & The species' taxonomic genus or scientific name \\ \hline 
+Importer & String & Abbrevation of the country in ISO-3166-1 importing the species \\ \hline 
+Exporter & String & Abbrevation of the country in ISO-3166-1 exporting the species \\ \hline
+Origin & String & Abbrevation of the country in ISO-3166-1 which the species originated \\ \hline
+Import reported quantity & Integer & Quantity of the imported species' as reported to CITES. Blank if an export record. \\ \hline
+Export reported quantity & Integer & Quantity of exported species' as reported to CITES. Blank is an import record. \\ \hline
+Unit & String & Quantity type varying from 'g' for grams to 'lbs' for pounds. Default is unit quantity. \\ \hline
+Purpose & String & The purpose with which the species was exported or imported. \\ \hline
+Source & String & Describes how species was brought onto market. \\ \hline
+\end{tabular}
+\caption{Fields in the Wildlife dataset as described by CITES} \label{tbl:dataset-fields}
+\end{table}

@@ -1,0 +1,239 @@
+% !TEX root = ./setup.tex
+
+\section{Introduction}
+Interactive museum exhibits create experiences that are more enjoyable and immersive. Visitors feel more engaged and can identify better with a museum's collection when they can interact with it. The Dutch Resistance Museum\footnote{Dutch Resistance Museum - Verzetsmuseum, \url{https://www.verzetsmuseum.org/museum/en/museum}, Accessed 08-02-2018} in Amsterdam is looking for ways to increase the interactivity and engagement between visitors and the twelve main dilemmas in their main exhibition. This paper proposes a solution where multiple exhibits are digitally augmented with screens and RFID readers that visitors can interact with by means of smart identity card replicas. In its premise, it lets visitors decide on a set of dilemmas that Dutch citizens faced during World War II (WWII) and afterwards, it shows the popularity of the visitor's choices and creates a personalized story out of their choices.\\
+
+\noindent This research investigates the design and implementation of an interactive museum experience for the Dutch Resistance Museum, that highlights the dilemmas people faced during the occupation of the Netherlands between 1940-1945.\\
+
+\noindent The design of \textit{Identification Rumble} as an interactive museum experience was the result of a collaboration between Master of Science (MSc) students from the University of Amsterdam (UvA), staff from the Dutch Resistance Museum and students from Media College Amsterdam. \\
+
+\noindent Section \ref{sec:stakeholder} examines the expectations of the museum staff as well as key challenges within the project domain. Hereafter section \ref{relwork} offers a short review of related work. Section \ref{probmed} describes the problem statement and methodological approach underlying this research. Section \ref{intexper} provides an overview of the design process from concept to a final interaction journey proposal. Section \ref{systemdescription} presents a detailed description of the system. Finally section \ref{discussion} discusses feedback, limitations and provides a conclusion, recommendation and future work.
+
+
+\subsection{Stakeholder} \label{sec:stakeholder}
+From 1940 to 1945 the Netherlands were occupied by Nazi Germany. The Dutch Resistance Museum is a museum about this period and focuses mainly on how the Dutch citizens reacted to the occupation. The collection of the Dutch Resistance Museum is related to the occupation and the resistance movement in the years 1940-1945. It is one of the largest in the Netherlands. The objects, photographs and documents are used primarily to illustrate the personal experiences of people during the occupation. One of the museums main focuses is the difficult decisions the Dutch citizens had to make during WWII. Twelve main dilemmas from the occupation are represented by questions projected onto the floor of the museum. The questions featured in the dilemmas are the following:
+\begin{itemize}
+\item Stay on?
+\item Adapt?
+\item Stay on?
+\item Adapt?
+\item Cooperate?
+\item Register?
+\item Remain a Member?
+\item Boycott?
+\item Help?
+\item Strike?
+\item Hand in?
+\item Report?
+\item Sign?
+\item Taking Revenge?
+\end{itemize}
+Through personal stories the museum presents the visitor with arguments for both sides of the dilemma.\\
+
+The Dutch Resistance Museum has a permanent exhibition and one changing exhibition. For the permanent exhibition visitors are given an audio guide that they can activate at multiple points throughout the exhibition which provides them with extra information. The museum works with volunteers in their staff. Among other things they work at the front desk, sell tickets and explain the audio guide.
+
+\section{Related Work}\label{relwork}
+\subsection{Interactive Museum Experiences}
+Designing and using interactive technology for museum exhibits and exhibitions is a topic within the field of Human Computer Interaction (HCI) that has been studied for a long period of time\cite{Capurro2015TangibleApplications,Ciolfi2007SupportingDesign,Hornecker2006,Marshall2016UsingExhibition}. Almost two decades ago an autonomous interactive robot RHINO was used as a tour guide in the \textit{'Deutsches Museum'} in Bonn,
+Germany\cite{Burgard1999}. Augmenting historical museum exhibitions leads to all kinds of visitors engaging with the exhibit(s) which leads to better understanding, are more enjoyable and create visitor experiences that extend and complement the exhibition\cite{Hornecker2006,Marshall2016UsingExhibition}.
+
+\subsection{Smart Replicas}
+Smart replicas are tangible objects that are adopted from original or copied existing cultural heritage objects. These replicas are digitally augmented and used for interaction between visitors and certain exhibits. 
+In their paper, \citet{Marshall2016} argue that using smart replicas helps with \textit{"[...] shaping different visitor experiences and providing an emotional dimension to complement the factual one"}\cite{Marshall2016UsingExhibition}. 
+One way of augmenting replicas with technology is through using Radio-frequency identification (RFID) tags. The Exploratorium, a hands-on science museum in San Fransisco, uses a custom-designed RFID application: eXspot. Here, RFID readers are mounted on museum exhibits and visitors carry around a RFID tag on a card. Interacting with these augmented exhibits allows visitors to (among other things) \textit{"[...] capture information about exhibits they visit and take souvenir photographs while at the museum"}\cite{HsiSherryFiat2010}. Another example is a RFID-based museum guide developed by Huang et al. which results in museum visitors exploring exhibitions more freely and thoroughly. Their results show that all participants (population size: 133) agree on the ease of use of this technology and 78\% of museum visitors enjoyed learning while using the museum guide\cite{Huang2011}.
+
+\section{Problem Statement \& Methodological Approach} \label{probmed}
+
+\subsection{Problem Statement} \label{Problem}
+The permanent exhibition of the Dutch Resistance Museum about the occupation of the Netherlands by Nazi Germany between 1940 and 1945 contains twelve dilemmas people faced during this time. However, the dilemmas are currently represented by questions projected onto the ground (Figure \ref{dilemma}). The museum asked a team of MSc students from the University of Amsterdam to develop one (or more) interactive museum exhibit(s) to present their current dilemmas and engage their visitors to a greater extend. The exhibit has to be integrated into the permanent exhibition without disturbing the look and feel of the exhibition.
+
+\begin{figure} [H]
+\includegraphics[width=8cm]{assets/dilemma.jpg}
+\caption{The Current Representation of Dilemmas in the Dutch Resistance Museum}
+\centering
+\label{dilemma}
+\end{figure}
+
+\subsection{Methodological Approach} \label{Methodological Approach}
+The exhibit is designed via a user-centered approach that constantly stays true to the user needs. User needs are assessed through participant observations and three rounds of user testing. User testing is carried out through experience testing with a qualitative and inductive approach and with constructivist and interpretivist perspectives.
+
+The design process is carried out with help of the \textit{double diamond design process model} (Figure \ref{Diamond}). This model divides the design process into four stages: discover, define, develop and deliver. The stages of discover and define make up the conception phase, while the stages of develop and deliver make up the prototyping phase. Designed by the Design Council in 2005, the double diamond illustrates the creative process of going from various ideas (divergent thinking) to the best idea through refinement (convergent thinking)\cite{UKDesignCouncil2005AProcess}. 
+
+\begin{figure} [H]
+\includegraphics[width=8cm]{assets/diamond.jpg}
+\caption{The Double Diamond Design Process Model (Informaat, 2017)}
+\centering
+\label{Diamond}
+\end{figure}
+
+\newpage
+\section{Designing an Interactive Experience} \label{intexper}
+
+Designing interactive components for the Dutch Resistance Museum exhibition was a collaborative process that was led by MSc students from the UvA \textit{Information Studies} master's programme and took place over five months. This section provides an overview of the process from concept (Section \ref{concept}) to a final interaction journey proposal (Section \ref{final_int_jour}) through the use of user needs and scenario (Section \ref{persona}), system requirements (Section \ref{sys_req}) and usability testing (Section \ref{US_TEST}).
+
+
+\subsection{Concept} \label{concept}
+Using the approach mentioned above (Section \ref{Methodological Approach}) a concept was created as a solution to the problem discussed in section \ref{Problem}. \textit{Identification Rumble} is a system that gives visitors of the Dutch Resistance Museum the opportunity to make choices people encountered during the occupation. The visitors get a replica of an identity card from that period. They use this item to register the choices they make while going through the exhibition. Dilemma stations are placed on multiple locations in the permanent exhibition. The dilemma station is an screen integrated in the interior of the exhibit. When visitors scan their identity card they are provided with an animation showing the visitor or group the context of the dilemma and a question. The visitor or group answer the question by scanning their identity card at the correspondent reader. They can visit as many dilemmas as they like. At the end of the exhibition the \textit{Evaluation Station} allows visitors to reflect on their choice, see potential consequences of their answers and compare their own decision to choices made by previous visitors.
+
+\subsection{User Needs and Scenario} \label{persona}
+
+\subsubsection{User Group}
+
+The Dutch Resistance Museum attracts different kind of groups. One of the biggest groups of visitors is the English speaking tourist. As can be seen in (Figure \ref{Graphs}) 53\% of the visitors in 2016 originated from English speaking countries. This is followed by 26\% of visitors coming from the Netherlands and 20\% of visitors coming from other countries. The attraction the museum has on English speaking visitors is also visible in the language selection of audio guides. In 2016 a total of 50,160 audio guides were given to visitors. Of these audio guides 35,044 were in English, 4,812 in Dutch, 3,318 in German and the rest of the audio guides were set to other languages\cite{CommissariaatvoordeMedia2016}. The tourists that visit the museum are not particularly interested in internationally themed exhibitions. They almost exclusively visit the museum for the permanent exhibition which tells the Dutch story of the occupation during WWII\cite{VerzetsmuseumAmsterdam2017Ondernemingsplan2017-2020}. \\
+
+Families with young children and school groups also visit the museum. Families with young children can go to the exhibition Dutch Resistance Museum Junior\footnote{\url{https://www.verzetsmuseum.org/museum/nl/verzetsmuseum-junior}, Accessed 09-02-2018} and the museum provides schools with special education programs. The system discussed in this paper focuses on the permanent exhibition of the museum. Therefore, families with young children and school groups are not the intended target user group of the system.
+
+\begin{figure} [H]
+\includegraphics[width=7cm]{assets/Graphs.JPG}
+\caption{Age and origin of Dutch Resistance Museum visitors\cite{CommissariaatvoordeMedia2016}}
+\centering
+\label{Graphs}
+\end{figure}
+
+\subsubsection{Persona} 
+This section introduces a persona, named Tony the Tourist, to increase the understanding of the user group and their needs. Tony represents a range of museum visitors that will be interacting with Identification Rumble.\\
+
+Tony is 36 years old and lives in Birmingham in the United Kingdom. He has a middle-range income and considers himself an environmentalist. He likes to read books, watch documentaries and travel. When he is traveling he likes to visit places featuring cultural heritage, for example museums. Tony is politically involved and is frustrated by environmental pollution and developments such as Brexit and the rising house prices.
+
+\subsubsection{Scenario}
+
+Tony and his girlfriend Emma go on a vacation to the Netherlands. They decide to visit the Dutch Resistance Museum in Amsterdam. Tony's grandparents survived WWII and he is interested in different points of views. When Tony and Emma enter the museum they buy a ticket at the front desk. The museum volunteer working at the desk asks the couple if they would like to go through the exhibition with \textit{Identification Rumble}, an interactive choice based experience. When Tony agrees the volunteer hands him a replica of an identity card that was used during WWII and explains that it functions as a tool for Tony to interact with the exhibition. The volunteer explains that they only get one identity card for both of them and that they will be using it to register choices they make as a group. The identity card is attached to a cord which Tony hangs around his neck. Before entering the exhibition, Tony comes across a language selection station prompting him to scan his identity card at his preferred language. Tony pushes his card against the reader underneath the symbol of the United Kingdom flag. Tony has been in Amsterdam for a few days and has had some experience with the public transport. He recognizes the movement of scanning the identity card being similar to using the public transport card. The language station emits a beeping noise confirming Tony's language selection.\\
+
+Tony and Emma enter the exhibition and walk around. They come across a screen that is integrated into the interior of the exhibition. The screen prompts Tony to scan his identity card. He complies which in turn plays an animation on the screen. The animation starts off with a short text telling Tony and Emma that in the beginning of the occupation during WWII all civil servants were required to fill in ancestry forms. The animation proceeds to show people in a library having a conversation. They discuss whether the main character of the video, named Theo Inden, should fill in the form or not. Theo is Jewish and is worried about filling in the form. The other character in the animation is Theo's coworker, Johan, trying to persuade him to fill in the form. They debate their points of view and after that the library and Johan fade out. This leaves a prompt behind asking Tony and Emma what they would do in Theo's situation. They are encouraged to discuss if possible and to scan the identity card to register their choice. The options \textit{'Register'} and \textit{'Refuse'} are displayed on the screen being aligned with their corresponding card reader. Tony and Emma discuss the two options, the points that the characters in the video made and other arguments Tony and Emma came up with themselves. After a few minutes they decide to go for the \textit{'Refuse'} option. Tony scans the identity card by holding it against the reader aligned with the word \textit{'Refuse'} on the screen. The reader beeps to indicate that their choice has been registered. Before moving, along Emma points out to Tony the ancestry form that is being displayed near the screen. \\
+
+Tony and Emma move through the exhibition while encountering other screens. More dilemmas are being presented to them in the same way as the \textit{'Register?'} dilemma. Each dilemma containing an animation with dialogue and a choice to be made. At some point in the exhibition, Tony comes across real identity cards that look very similar to the identity card he is carrying. Tony and Emma spend some time looking at the identity cards and reading about them.\\
+
+At the end of the exhibit, Tony and Emma find another screen which is labeled \textit{Evaluation Station}. Tony scans the identity card once again. Some of the dilemmas Tony and Emma visited pop up on the screen. The dilemmas are shown next to each other horizontally and arrows on the both sides of the screen indicate that it would be possible to scroll through all the visited dilemmas. Tony touches the screen to do so. When he touches the dilemma \textit{'Register?'} the screen informs him which choice they made and how many visitors made the same choice. It also states that almost all civil servants in 1941 filled in the ancestry form which led to Jewish civil servants being fired the next month. Tony touches an arrow in the left top of the screen to return to the overview of the dilemmas. In the left bottom corner of the screen underneath the dilemmas Tony and Emma notice a column named consequences. This section informs them that the choices they made during the exhibit where rebellious but also increases the risk of not surviving WWII. They browse the dilemmas a couple minutes longer and then touch an arrow in the bottom right of the screen which reads \textit{'continue'}. They get the option to e-mail the results of their exhibit experience to themselves. They both fill in their e-mail addresses. Tony touches \textit{'continue'} once again. The screen thanks them for their visit and reminds them to return their identity card at the front desk. It promises Tony and Emma a discount on coffee in the restaurant next door if they return their identity card. Tony and Emma willingly do so and enjoy their coffee next door.
+
+\newpage
+\input{system-requirements} \label{sys_req}
+
+
+\subsection{Usability Testing} \label{US_TEST}
+The project went through three rounds of usability testing. Each round produced feedback that in turn allowed to further refine the prototype. This section discusses each of these iteration rounds, their objectives, the feedback that was collected and their effects on the prototype.
+
+\subsubsection{Iteration I}
+The first iteration round started with the usability testing of a low-fidelity paper prototype. The main objective of this testing round was to reflect on the interactions and the ease of use of the design. The low-fidelity paper prototype included: one paper passport, one paper scanner, one A4 paper representing the starting screen and multiple A4 papers with a written out preliminary animation. Two test sessions were carried out during this testing round. Each session commenced with setting the scene. Once test participants understood their role as museum visitors they were asked to let the paper prototype guide them through the process.
+
+\begin{figure} [h]
+\includegraphics[width=8cm]{assets/paper_pro.JPG}
+\caption{Low-Fidelity Paper Prototype}
+\centering
+\label{low_fi}
+\end{figure}
+
+Feedback showed that the intended interactions were clear and felt natural but that it was unclear how visitors or groups were supposed to make decisions with only one scanner on the wall and no buttons to make choices apparent. Due to the textual nature of the animation, test participants expressed their concern regarding the amount of text that was used to introduce the dilemma.
+
+\subsubsection{Technical Prototype} The feedback from the low-fidelity prototype testing sessions was used to refine the design and served as input for the technical prototype. The choice to include not one but two dilemmas in the prototype was made to communicate the idea of an interactive experience more effectively. A QR-code on a mobile phone was introduced to simulate a situation where visitors can choose their own answer by scanning a passport. Passport scanning was replicated by scanning the QR-code with help of a web-cam (Figure \ref{QR_fi}). The QR-code was linked to a passport and kept track of language preference and dilemma choices. By linking a language preference to a passport, visitors are enabled to watch animations in their preferred language. The technical prototype was designed as a web-application.
+
+\begin{figure} [h]
+\includegraphics[width=8cm]{assets/first-ux-test.JPG}
+\caption{Technological Prototype Testing Set-Up}
+\centering
+\label{tech_fi}
+\end{figure}
+
+\subsubsection{Iteration II}
+The second iteration round started with the usability testing of the technical prototype. The main objective of this testing round was to reflect on the interactions, the idea of giving visitors a journey and the technology behind it all. To give test participants the impression that they were testing an interactive museum experience, the second usability testing round was executed with two laptops each representing a different dilemma station (Figure \ref{tech_fi}). Test participants were given four tasks: choose the language of the passport, go to the first dilemma station, go to the second dilemma station and proceed to the evaluation station.
+
+Four test sessions were carried out during this test round. Each session commenced with a briefing that explained the museum context and the QR-code mechanism. Hereafter testing participants were asked to sign a consent form declaring that recordings and feedback may be used in an anonymized way. Test participants were asked to switch laptops after each action was completed, to think out loud and to take into account that this prototype was purely technical and far from the fully realized idea.
+
+\begin{figure} [h]
+\includegraphics[width=8cm]{assets/test_QR2.jpg}
+\caption{Technological Prototype Testing QR Scanning}
+\centering
+\label{QR_fi}
+\end{figure}
+
+Feedback from this test session emphasized that the binary choice (register or not) to conclude a dilemma station was perceived as pleasant and that walking around the room from station to station added to simulating walking around the exhibition. However, scanning the passport did not feel rewarding and a feedback beep was suggested. test participants also expressed feelings of incompleteness after answering a dilemma and suggested more feedback. The evaluation station at the end of the museum visit got a lot of positive feedback and test participants were very interested in seeing the choices that other visitors had made before them.
+
+\subsubsection{Functional Prototype} The feedback collected during the second usability testing rounds was used to refine the design and served as input for the functional prototype. To give the prototype a more finalized look and feel, a carton box was decorated with wallpaper and cut in such a matter that it fit around a laptop screen. This way the laptop behaved and looked like a television screen as if already integrated into the exhibition (Figure \ref{Final_setup}). Only one RFID reader was available for this project, therefore two paper RFID readers simulated real life scanners. Instead of a textual dilemma introduction the main dilemma, \textit{'Register?'}, is now introduced through an animation wherein two characters have a conversation about the situation surrounding the dilemma\footnote{\url{https://identification-rumble.science/dilemmas/register}, Accessed 30-01-2018}. The second dilemma, \textit{'Sign?'}, was kept as part of the prototype in textual form because test participants remarked that it indeed gave them a better grasp of the interactive museum experience as opposed to only showing one dilemma. Moreover, to keep the passport replica historically correct, it became an identity card\footnote{\url{https://identification-rumble.science/persoonsbewijs}, accessed 06/02/2018} with an RFID chip embedded (Section \ref{System_Description}). Finally, the evaluation station was added to the end of the experience as proposed by multiple test participants to enable a moment of reflection, comparison and to give visitors an idea of how their choices could have influenced someone's life during that period.
+
+\begin{figure} [h]
+\includegraphics[width=8cm]{assets/prototype-in-museum-far.jpg}
+\caption{Functional Prototype Test Setup}
+\centering
+\label{Final_setup}
+\end{figure}
+
+\subsubsection{Iteration III}
+The third and last iteration round started with the usability testing of a functional prototype (Figure \ref{Final_setup}). The main objective of this testing round was to see if real visitors of the Dutch Resistance Museum understood the concept, objective and interactions of the Identification Rumble exhibit. The functional prototype entailed one cardboard box decorated with wallpaper and two dummy RFID scanners, one RFID scanner lined up behind the dummy scanners (Figure \ref{Box_Draw}), one laptop hooked up to a RFID scanner, two identity card replicas with embedded RFID chips. The prototype exhibit was set up in the main hall of the museum across the language activation wall (Figure \ref{INT_MAP}, point B). All testing participants signed a consent form declaring that recordings and feedback may be used in an anonymized way.
+
+\begin{figure} [h]
+\includegraphics[width=8cm]{assets/box_draw.jpg}
+\caption{Line Drawing of Functional Prototype with Placement of the Scanners}
+\centering
+\label{Box_Draw}
+\end{figure}
+
+Ten test sessions were carried out during this test round of which two involved a group of two people. Each session commenced with a briefing explaining the concept, context and further testing procedure. Hereafter, test participants were given four tasks: activate the identity card by choosing a preferred language, complete the first dilemma station, complete the second dilemma station and finally, proceed to the evaluation station.
+
+\begin{figure} [h]
+\includegraphics[width=8cm]{assets/test_final1.jpg}
+\caption{Functional Prototype Test Session}
+\centering
+\label{Final_fi}
+\end{figure}
+
+The feedback acquired during this final test session revealed that the test participants felt positively connected to the replicated identity card and preferred the animated dilemma station over the textual dilemma station. The test sessions with the groups of two people revealed the need for more encouragement regarding discussion between themselves. Some of the test participants declared that the text speed within the animation was going too fast and suggested the use of voice recordings to make it easier on visitors. The evaluation station was received as very positive and perceived as a good conclusion to the identification rumble experience. However, test participants acknowledged that at the time of testing the evaluation station was relatively empty and that they would envision the station to relate their answers to actual events from the occupation of the Netherlands between 1940 and 1945.
+
+
+\subsubsection{Final Prototype}
+The functional prototype received its final refinements after the final test sessions. This resulted in adding ambient sounds, voice recordings, an encouragement for discussion and a timer of 30 seconds to the animation. The evaluation station now contains more connections to actual events from the time of the occupation and gives visitors more insight into possible consequences of their choices. Lastly, the font used for the text within the animation was adjusted to enhance readability.
+
+\subsection{Final Interaction Journey Proposal} \label{final_int_jour}
+\textit{Identification Rumble} is an interactive and engaging experience that integrates new technology into a historical exhibition and creates awareness among visitors regarding dilemmas people faced during the occupation of the Netherlands between 1940 and 1945. Figure \ref{INT_MAP} shows an overview of the museum's main exhibition route with the Identification Rumble interaction points. By using smart replicas of identity cards that were introduced and required in the course of 1941, Identification Rumble facilitates museum visitors of the Dutch Resistance Museum with an experience that is complementary to the historical main exhibition. Moreover, with Identification Rumble visitors engage and connect with the twelve dilemmas to a greater extend and feel more connected to the exhibition and the stories that it tells. 
+
+\begin{figure} [h]
+\includegraphics[width=8cm]{assets/lang_pass.jpg}
+\caption{Visitors Activate their Identity Card on a Preferred Language Activation Point}
+\centering
+\label{LANG_PASS}
+\end{figure}
+
+\subsubsection{Entrance}
+When visitors enter the museum, they first encounter the front-desk where they buy an entrance ticket (Figure \ref{INT_MAP}, point A). With their entrance ticket, visitors also receive a smart replica of a 1940's identity card. The volunteer behind the front-desk informs the visitor that this card is for interacting with certain exhibits. Before entering the exhibition, visitors walk past the language activation wall (Figure \ref{INT_MAP}, point B). On this wall they activate their identity card by holding it against a preferred language activation point (Figure \ref{LANG_PASS}).
+
+
+\subsubsection{Exhibition Route} Instead of dilemma questions that are projected on the floor, dilemmas are now represented by dilemma stations; interactive exhibits scattered around the exhibition that each uncover a different dilemma. A dilemma station consists of a television screen that is integrated into the wall and two RFID scanners that serve as interaction points. When a visitor approaches a dilemma station the screen shows the message \textit{"Scan your ID Card to start"} accompanied by an arrow that is pointing to a scanner (Figure \ref{SCAN_START}). After the visitor scans their smart replica an animation starts that introduces the dilemma.
+
+The script for the animation is based on real historical events and the characters are depicted using colored pictures of people from WWII (in the prototype the characters are not yet depicted in this way due to time and scope constraints). The choice to realize the animation(s) in this manner is based on the fact that the Dutch Resistance Museum works with real historical imagery to create a story as immersive and realistic as possible.
+
+\begin{figure} [H]
+\includegraphics[width=8cm]{assets/scan_start.jpg}
+\caption{Dilemma Station Start Screen}
+\centering
+\label{SCAN_START}
+\end{figure}
+
+\subsubsection{Exit}
+Approaching the end of the exhibition visitors will find the \textit{Evaluation Station} (Figure \ref{INT_MAP}, point C).
+It consists of a television screen and single RFID reader for activation.
+In a similar fashion as the dilemma stations, the screen prompts visitors to scan their identity card at the activation point.
+Scanning an identity card provides the visitor with an overview split into multiple sections.
+
+The main section, found in the top row, displays a column per dilemma.
+These elements state previously made choices in the dilemmas in order to help visitors remembering their journey.
+Depending on the answer a visitor has given a real-life consequence is described which people faced during WWII.
+This helps to emphasize that there was not necessarily a good choice in these situations.
+In addition to that, an individual's choice is compared to previous answers of other visitors.
+The comparison indicates whether the answer followed the majority of other people or if it is different.
+
+Remaining space is filled with an overview of visitor language distribution and dynamic sections reserved for changing content.
+Showing the language distribution primarily serves the purpose of giving the visitor a feeling who else is visiting the museum.
+The dynamic sections can be used by the museum to highlight announcements and incentivize visitors to return their identity card replicas.
+Collection points for returned identity cards are positioned next to the evaluation station.
+
+\begin{figure} [H]
+\includegraphics[width=7cm]{assets/Map_Points.jpg}
+\caption{Visitor Museum Journey with Interaction Points}
+\centering
+\label{INT_MAP}
+\end{figure}
+
+
+\input{system-description} \label{systemdescription}
+
+\input{Discussion} \label{discussion}
+\newpage
+\input{appendix}
