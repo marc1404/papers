@@ -1,0 +1,90 @@
+\section{Related Work} \label{sec:related-work}
+This section establishes a bird's-eye view of past and current research projects connected to the topics touched by the \textit{Beerlytics} system.
+It covers different word embedding algorithms (Section \ref{sec:word-embeddings} and the field of (visual) summarization (Section \ref{sec:summarization}).
+
+
+\subsection{Word Embeddings} \label{sec:word-embeddings}
+The distributional hypothesis from linguistics states that words which are used and appear in the same context tend to have similar meanings \cite{Harris2015}.
+J.R. Firth popularizes the fundamental idea that \emph{``a word is characterized by the company it keeps''} \cite{Firth1957} which is picked up by the natural language processing (NLP) research community.
+Understanding the meaning of a word on a human-level is a core research objective of NLP \cite{Levy2015}.
+Even though processing natural language on such a semantic level is still out of reach word embedding algorithms have significantly improved word similarity tasks \cite{Young}.
+These algorithms create a vectorial space for a vocabulary.
+Low-dimensional vectors containing real numerical values represent words from the vocabulary.
+It is shown that vectors in close vicinity to each other have a similar semantic meaning \cite{Levy2015}.
+For example, the work from Mikolov et al. \cite{Mikolov2013a} demonstrates that calculating \emph{vector("King") - vector("Man") + vector("Woman")} obtains a vector in close proximity to \emph{vector("Queen")}.
+Similarity between vectors is commonly calculated using measures such as cosine similarity \cite{Young}.
+
+\subsubsection{word2vec}
+The field of word embeddings was first revolutionized by the work of Mikolov et al. \cite{Mikolov2013, Mikolov}.
+Their software tool popularized \textit{word2vec} as the umbrella term for a group of related approaches to produce word embeddings  \cite{Method2014}.
+It provides a highly efficient way to calculate state-of-the-art embeddings which enabled companies such as Google to create pre-trained vectors for large-scale vocabularies \cite{Young}.
+The researchers propose the continuous bag of words (CBOW) and skip-gram models.
+Given a surrounding context $c$ with a window size of $k$, CBOW calculates the conditional probability for a target word $t$ within the context.
+Conversely, skip-gram predicts the words for the surrounding context $c$ when given the central word $t$.
+Further work by Mikolov et al. \cite{Mikolov} implements extensions on the original skip-gram model increasing performance and accuracy of the representations of less encountered words.
+It also seeks to reduce the limitation of word representations trying to express idiomatic phrases.
+Using vectors to represent full sentences improves the expressiveness of the skip-gram model for these phrases.
+Lastly, it also introduces negative sampling instead of the previous hierarchical softmax for training embeddings.
+It draws $k$ samples from a negative noise distribution to achieve higher accuracy.
+Explaining the reasons for why negative sampling produces higher quality embeddings is still a question of ongoing research \cite{Method2014}.
+
+
+\subsubsection{GloVe}
+Global vectors (GloVe) for word representations builds upon the ideas of previous work such as latent semantic analysis (LSA) \cite{Deerwester1990} and word2vec \cite{Mikolov2013a}.
+Pennington et al. \cite{Pennington} argue that the model families used in these works each feature specific shortcomings.
+Supposedly, LSA suffers from a sub-optimal vector space structure while the skip-gram model disregards the global co-occurrence count in a corpus.
+The authors argue that by combining the model families and leveraging their advantages, previous embedding techniques can be outperformed \cite{Pennington}.
+Fusing global matrix factorization and local context windows produces a global log-bilinear regression model that makes efficient use of global corpus statistics.
+The performance of the newly proposed model is measured on word analogy tasks and demonstrates 75\% accuracy \cite{Pennington}.
+
+
+\subsubsection{fastText}
+Bojanowski et al. \cite{Bojanowski2016} from Facebook AI Research (FAIR)\footnote{\url{https://research.fb.com/category/facebook-ai-research, accessed: 18-07-2018}} create fastText which iterates on the skip-gram model.
+Their new approach features state-of-the-art training speed and enables the calculation of vectors for words which do not appear in the vocabulary.
+Previous techniques represent words using a single vector without taking morphological variations into account.
+fastText introduces subword information to vector representation by computing character n-grams for each morphological form of a word.
+The word is then represented as the sum of these n-gram vectors.
+Further research by Conneau et al. \cite{Conneau2017} employ fastText to outperform other methods training cross-lingual word embeddings.
+Their unsupervised method eliminates the need for bilingual corpora which is a requirement for supervised counterpart methods.
+
+
+\subsubsection{StarSpace}
+Wu et al. \cite{Wu2017} iterate and expand on the previously discussed fastText model creating a general-purpose embedding technique called StarSpace.
+It can be applied to a multitude of use cases: (1) text/sentiment classification, (2) relevance rank ing in information retrieval, (3) collaborative-based filtering recommendation, (4) embedding multi-relational graphs, and (5) training embeddings on a word/sentence/document level.
+The introduced model is a significant improvement over previous embedding techniques which exclusively train textual embeddings.
+StarSpace embeds entities of varying types in a common vectorial space.
+Entities are represented as bag-of-features which differ depending on the entity type.
+Most importantly, StarSpace enables the comparison of entities with different types.
+
+
+\subsection{Summarization} \label{sec:summarization}
+Summarization problems exist in a variety of domains including text, image, and video \cite{B2018a}.
+The nature of summarization is divided into the main categories of extractive \cite{Aggarwal2012} and generative summaries.
+Extractive summaries use excerpts or representative examples as a way to summarize the original content.
+In a survey on automatic text summarization \cite{Das2007}, 3 essential aspects of summaries are reiterated: (1) single or multiple documents may be used for summarization, (2) important information needs to be preserved, and (3) a summary should be short.
+
+Successful summarization projects have been implemented for different application domains.
+
+Ren et al. \cite{Ren2013} focus on selecting a summary set of tweets based on user interests.
+Their proposed model for personalized time-aware tweets summarization emphasizes the characteristics novelty, coverage, and diversity.
+
+Touristic routes are summarized in an automatic, multi-modal approach by providing visual and textual descriptions \cite{VanDenBerg}.
+It enables interactive city exploration in a prototype application using the multi-modal summaries.
+
+Rudinac et al. \cite{Rudinac2013a} present a method to create visual summaries of geographic areas based on user-contributed images.
+Their approach values the selection of representative and diverse images from the dataset.
+Furthermore, automatic evaluation is presented using a novel protocol that eliminates the need for human annotations.
+User preferences for visual summaries are researched using a large-scale crowdsourcing approach via the \textit{Amazon Mechanical Turk (MTurk)}\footnote{\url{https://www.mturk.com}, accessed: 17-07-2018} platform  \cite{Rudinac2013}.
+
+Product review summarization is a field of ongoing research as well.
+With an abundance of reviews at hand readers are easily overwhelmed by the sheer number of expressed opinions, and thus extracting meaningful information becomes a challenging task.
+Existing solutions to this problem focus on different aspects in their summarization process.
+In feature-based summaries \cite{Hu2004} product features are extracted and reviews are classified according to their sentiment towards these features.
+This approach aims to reduce opinion bias when only a subset of reviews is read.
+Similarly, this goal can also be achieved by ranking a set of questions about a product and matching reviews that are able to answer their respective question \cite{Liu2017}.
+As other research has pointed out \cite{Liu2017, Al-Dhelaan2017} diversification is an important and sometimes overlooked characteristic of review summarization.
+Besides including representative reviews into the summary diverse sentiments and aspects should be included as well.
+
+Bearing this in mind, the summarization problem can be approached with a wider scope taking into account the dominance of social multimedia \cite{B2018a}.
+The authors argue that summarization should be revisited in the light of modern multimedia to connect research areas which have been working in isolation from each other.
+In order to meet today's information needs of users tapping single media sources is not sufficient anymore.

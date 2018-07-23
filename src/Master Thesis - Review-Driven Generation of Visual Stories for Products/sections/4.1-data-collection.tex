@@ -1,0 +1,73 @@
+\subsection{Data Collection} \label{sec:data-collection}
+The process of \textit{data collection} concerns itself with obtaining or building a dataset which will be used for all further work on the project.
+As \textit{RateBeer} does not publish official datasets, third-party datasets are of limited availability, and the API only covers specific use cases \textit{web scraping} is used to build a full useable dataset.
+Web scraping is an extraction technique which gathers structured data from HTML pages.
+Therefore, the data collection process consists of 3 consecutive steps:
+\begin{enumerate}
+    \item Collecting links for relevant pages (Section \ref{sec:collecting-links})
+    \item Scraping pages for structured data (Section \ref{sec:data-extraction})
+    \item Data persistence (Section \ref{sec:data-persistence})
+\end{enumerate}
+
+
+\subsubsection{Collecting Links} \label{sec:collecting-links}
+As the first step in the data collection pipeline lists of links will be created for relevant pages.
+These will be consumed by the scraping process in the next step.
+Relevant pages include data which is considered to be potentially useful for further processing.
+Since the goal is to build visual stories for the beer pages on \textit{RateBeer} the original pages should be scraped to gather metadata about beers and their respective user-contributed reviews.
+The platform offers a way for users to contribute \textit{places} where beers can be purchased.
+A place is essentially any entity with a locality which also distributes beers (e.g., bar, restaurant, brewery, etc.).
+Links for place pages will be collected as well in order to form a relationship between a beer and multiple localities.
+
+The link scraping tool is implemented in \textit{Python}\footnote{\url{https://www.python.org/}, accessed: 11-07-2018} and uses the \textit{Beautiful Soup}\footnote{\url{https://www.crummy.com/software/BeautifulSoup/}, accessed: 11-07-2018} open-source library for parsing HTML documents, traversing their structure, and finding link tags.
+Its associated source code is available on GitHub\footnote{\url{https://github.com/SaschaVanEssen/Thesis/tree/master/Scraper}}.
+
+
+\subsubsection{Data Extraction} \label{sec:data-extraction}
+Once the first step in the data collection pipeline is finished the lists of beer and places links are used by the second step for data extraction.
+The web scraping process is implemented in \textit{JavaScript}\footnote{\url{https://www.w3.org/standards/webdesign/script}, accessed: 11-07-2018} using the \textit{Node.js}\footnote{\url{https://nodejs.org/en/}, accessed: 11-07-2018} \cite{Tilkov2010} runtime and relies on \textit{cheerio}\footnote{\url{https://github.com/cheeriojs/cheerio}, accessed: 11-07-2018} as an open-source library for parsing HTML into the Document Object Model (DOM)\footnote{\url{https://www.w3.org/DOM/}, accessed: 12-07-2018} which can be programmatically traversed and searched for data extraction purposes (Similar to the \textit{Beautiful Soup} library used in \ref{sec:collecting-links}).
+Respective source code can be found on GitHub\footnote{\url{https://github.com/marc1404/msc-thesis/tree/master/beer-scraper}}.
+
+It reads a list of links and transforms it into a queue of scraping tasks.
+These tasks can be processed concurrently as the program has to wait for responses of its HTTP requests to the \textit{RateBeer} website.
+Depending on the type of page the scraper has 4 strategies to extract different information: (1) beer metadata, (2) beer reviews, (3) place metadata, and (4) relationships between a place and the beers it distributes.
+Each strategy works in a similar fashion by searching specific HTML tags using their name, IDs, CSS classes, attributes, and location in the DOM tree.
+As these elements are found their data is extracted and converted to the correct type if necessary (e.g., integer or decimal numbers instead of raw strings).
+All single extracted properties of a page are brought together in the strategy's respective model.
+This step transforms the unstructured, raw data on the page into structured, semantic data models.
+These models are passed to the third and final step of the data collection process which is responsible for persisting the models to the database (Section \ref{sec:data-persistence}).
+
+
+\subsubsection{Data Persistence} \label{sec:data-persistence}
+Finally, the third and last step of the data collection process accepts structured data models as its input and stores them in the database.
+Persisting the data models to the database builds the dataset which is thereby made available for later usage.
+Access to the dataset is provided by the database management system (DBMS)\cite{Christensson2006} which acts as a sophisticated gateway to the underlying dataset.
+
+Concerning the choice of DBMS, one has to consider whether a relational database management system (RDBMS)\cite{Christensson2017} or a nonrelational (NoSQL) is more appropriate for the task at hand.
+The scientific nature of the project promotes a large-scale data collection approach which captures as many properties as possible.
+This approach is further justified due to the fact that 3 researchers in total are working with the dataset while having different targets in mind.
+It becomes problematic to judge whether certain data might be useful at a later point in time which speaks for a broader collection.
+Capturing a wide range of different properties with various types renders NoSQL databases as a favorable choice.
+These database systems do not impose a strict relational schema on their collections (respectively \textit{tables} in relational databases).
+Despite the tendency towards a NoSQL storage system MySQL\footnote{\url{https://www.mysql.com/}, accessed: 15-07-2018} has been chosen as the DBMS in question.
+This choice is backed by multiple factors:
+\begin{itemize}
+    \item All researchers working with the dataset are already comfortable with using a relational SQL database.
+    \item A relational schema encompassing all available properties on the scraped pages (Section \ref{sec:data-extraction}) has been created with minimal complexity in mind (no foreign keys, no relations, minimal indexing, and lax type/length restrictions).
+    \item Working with a relational database provides the structured query language (SQL)  as a powerful mechanism to access and manipulate data which is capable to perform joined queries (aggregations) with low complexity.\footnote{\url{https://dev.to/jignesh_simform/comparing-mongodb--mysql-bfa}, accessed: 15-07-2018}
+\end{itemize}
+The final dataset schema can be inspected in the appendix (see \nameref{sec:appendix-c}).
+
+As for the persistence process itself, the architecture is designed to mimic the data extraction (Section \ref{sec:data-extraction}) system.
+Each \textit{extraction} strategy has a corresponding \textit{insertion} strategy which transforms the particular data model into one or multiple $INSERT$-statements and executes them\footnote{\url{https://github.com/marc1404/msc-thesis/tree/master/beer-scraper/src/insert}}.
+In cases where multiple statements are required relations between models (e.g., place and beer) are saved into different tables.
+
+Finally, the following entries are available in the dataset (limited to the main models):
+\begin{itemize}
+    \item 106,088 beers (56 MB)
+    \item 13,035 breweries (26 MB)
+    \item 57,738 places (19.4 MB)
+    \item 2,940,890 reviews (1.7 GB)
+    \item 67,820 users (4.7 MB)
+\end{itemize}
+The collected data is preprocessed and used in the \textit{data analysis} pipeline (Section \ref{sec:data-analysis}) before it is consumed by the frontend prototype (Section \ref{sec:system-design}).

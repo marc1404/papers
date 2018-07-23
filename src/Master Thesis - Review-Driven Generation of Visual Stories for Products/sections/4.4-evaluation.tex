@@ -1,0 +1,115 @@
+\subsection{Evaluation} \label{sec:evaluation}
+The proposed \textit{Beerlytics} system aims to summarize products (i.e., beers) by generating visual stories using primarily user-contributed reviews and product metadata for displaying static information.
+It automatically selects a subset of reviews aimed at satisfying the requirements for representativeness and diversity.
+Furthermore, it provides keyword-based insight into different aspects of the product by exploiting word cooccurrence characteristics in reviews.
+Evaluating such a system using automated methods is unfeasible.
+There exists no ground truth data about the quality of reviews or extracted keywords.
+Consequently, user testing with the frontend prototype (Section \ref{sec:frontend-prototype}) intents to reveal opinions, improvements, suggestions, and criticism from real users regarding the different aspects of the system.
+
+The following section \ref{sec:approach} lays out the devised approach for user testing.
+Finally, section \ref{sec:results} concludes the system evaluation by discussing the user testing results.
+
+
+\subsubsection{Approach} \label{sec:approach}
+The user study is planned as qualitative research although quantitative results might provide interesting insights as well (see also section \ref{sec:conclusion-future-work}).
+Convenience sampling selects participants who are easily accessible for the researcher \cite{Marshall1996}.
+These are usually subjects in close vicinity.
+However, the subject group is broadened by probing participants from different countries: Germany and the Netherlands.
+User testing takes place in 2 iterations with 6 participants in each group.
+Accordingly, a total of 12 participants took part in user testing the frontend prototype.
+
+Research suggests that employing 3 to 5 evaluators in an evaluation is sufficient for gathering the main findings \cite{Nielsen1990}.
+Indeed, theoretical saturation has been reached in each iteration which justifies equally sized groups of 6 participants.
+
+The first iteration of testing is performed in Karlsruhe, Germany.
+Preliminary results are gathered between iterations which provide the basis for implementing improvements prior to the second round.
+The second iteration of the user study continues in Amsterdam, Netherlands.
+
+Participants are in the age group between 20 and 30.
+Their backgrounds are as follows: 5x information studies students, 2x business informatics students, 1x design student \& marketing, 2x software developer, and 2x business \& product management.
+It should be noted that personal information is intentionally decoupled from \nameref{sec:appendix-b} to respect privacy.
+
+The user testing procedure is semi-structured.
+Duration of a full test lies between 15 to 45 minutes.
+An initial briefing educates participants about the purpose, the concept of the original \textit{RateBeer} page, and the basic functionality of the \textit{Beerlytics} prototype.
+The briefing emphasizes that users should feel free to think out loud and comment on anything they find confusing, missing, poorly realized, or well done. 
+Following up on the briefing is the primary part of the study where participants are free to use both \textit{RateBeer} and \textit{Beerlytics}.
+They receive guidance from the researcher only if necessary (e.g., components in the prototype might not have been explored yet).
+Feedback is not strongly directed in a predefined way.
+Solely the attention of users is directed to focus on the reviews and keywords components.
+After finishing the testing phase participants can provide further comments in an open-feedback round.
+
+
+\subsubsection{Results} \label{sec:results}
+The preliminary results gathered after the first iteration suggest a range of improvements.
+Implementation of these suggestions before the second round has the primary benefit that participants focus on different aspects instead of pointing out the same shortcomings again.
+
+Firstly, adding search functionality to the index page provides users with the ability to search for other beers matching their interest (Figure \ref{fig:beerlytics-index}).
+The search input was initially missing thereby restricting users to the fixed set of most rated beers.
+
+On the beer detail page participants point out a missing mechanism for navigating back to the index page (apart from the browser's native navigation).
+The top left corner features an unobtrusive button for navigating back now.
+
+Regarding the rating and scores visible in the heading component of a beer (Figure \ref{fig:beer-heading}) users feel confused by the different rating schemes on the page (star rating 1-5, overall and style score 0-100, categorical rating 0-10).
+It is clarified that the varying schemes stem from the original \textit{RateBeer} page but could indeed potentially be unified for better cognition.
+The maximum value of 100 is added next to the overall and style score which was absent before the second iteration.
+
+Moving onto the reviews component (Figure \ref{fig:beer-review}) a trivial improvement is the addition of a ``Reviews'' heading which improves the separation between the heading and reviews section.
+The review count next to the author's name lacked a clear label as well.
+These seemingly small additions were wished for by nearly all participants of the first testing round.
+Thus, clarity is valued over minimalistic design in these cases.
+The rating radar chart in a user review initially only displayed the static user rating.
+Multiple test subjects expressed their wish of comparing the user rating with the average beer rating and the average rating of the review author in the same chart.
+This suggestion is realized while also adding a radar chart for the average beer rating in the sidebar component (Figure \ref{fig:beer-sidebar}).
+Another small improvement in the review component is the rephrased wording for the rating radar chart and user heatmap.
+The relationship between these visualizations to the review author was not clear before using possessive phrasing in their heading labels.
+
+Focussing on the sidebar component (Figure \ref{fig:beer-sidebar}) most participants in the first iteration suggested to employ color gradients for the IBU and calories scale.
+These gradients have been implemented while also adding a descriptive legend below the scales.
+
+Lastly, disclaimer statements are added in the heading of the reviews component (Figure \ref{fig:beer-review}) and below the keywords component (Figure \ref{fig:beer-nn}).
+Before the disclaimers where present users could easily feel perplexed by the quality of selected reviews or extracted keywords.
+Placing reminders helps to create awareness about the utilization of automated, unsupervised algorithms.
+
+After discussing the improvements spurred by the first iteration, the results are used to revisit the research questions from section \ref{sec:problem-statement}.
+The sub-questions \emph{SRQ1} and \emph{SRQ2} lead the way with a subsequent final look at the primary research question \emph{RQ}.
+
+\hfill
+
+\noindent
+\textbf{SRQ1:} The generation of visual stories for a product can be supported by using a word embedding algorithm to process user-contributed reviews.
+Training vector space models from product reviews allow performing clustering and keyword extraction.
+
+Cluster centroids point to the most representative review of their cluster while different clusters ensure diversity.
+Participants confirm that showing only a subset of reviews is beneficial for the product story (\emph{``preselection of reviews is a good idea''}, \emph{``less is more''}).
+Suggestions to improve this component include: helping to judge the trustworthiness of a review, working on the explainability why reviews are selected, and finding a way to pick the most neutral reviewers.
+Furthermore, the structural quality of reviews should be considered as well (\emph{``There's a sweet spot for length, neither too short nor too long''}, \emph{``formatting matters, should be easy to read''}).
+An interesting comment is also to \emph{``recognize average and deviating reviews, is it controversial?''}.
+
+The keywords component is perceived as an intriguing mechanism for exploring reviews based on different query keywords (\emph{``useful and interesting''}, \emph{``fun to play around with and explore''}).
+However, a majority of participants criticize the quality of extracted keywords.
+Noise should be reduced and duplicates filtered out.
+
+\hfill
+
+\noindent
+\textbf{SRQ2:} The quality of a visual product story varies between different word embedding algorithms.
+Naturally, the vertical page size is affected by the length of the selected reviews.
+Reviews selected by GloVe tend to be only a single or a few sentences long (\emph{``favors short, one-line reviews''}).
+Conversely, StarSpace seems to pick up the internal text structure displaying reviews ranging from well-structured stories, over long consecutive text blocks, to short one-line texts.
+The word2vec and fastText algorithms select reviews of medium to short length.
+
+Furthermore, the quality of the terms visible in the keyword chart affects the overall sentiment towards the product story.
+Multiple participants mention StarSpace as the preferred embedding regarding the quality of reviews and keywords (\emph{``StarSpace keywords are rather good''}, \emph{``seems to offer more interesting ... and relevant keywords''}).
+In case of the keyword component displaying nonsensical, duplicate, or irrelevant terms users immediately pointed out degraded usefulness.
+
+\hfill
+
+\noindent
+\textbf{RQ:} A product can be partially summarized by a visual story when information is condensed and displayed using appropriate visualizations, only the relevant subset of reviews is shown, context is provided for standalone values, and the product can be explored from different aspect angles.
+However, the summarization appearance of the \textit{Beerlytics} prototype leaves room for improvement.
+While participants unanimously prefer the prototype over the original \textit{RateBeer} page, it does not meet the expectations of a summary in terms of perception.
+Participants state that the size of the page and the number of visible elements lean towards a certain degree of clutter which could be kept more succinct (\emph{``reduce amount of keywords to reduce clutter''}, \emph{``collapse lower part of reviews to reduce amount of visible charts and maps''}, \emph{``requires a lot of scrolling''}).
+
+Displaying user ratings in a radar chart with the ability to compare them with the average beer or user rating is an appropriate choice (\emph{``... makes it easier to understand''}, \emph{``being able to compare ratings in radar chart is useful''}).
+Moreover, providing context through the use of scales and color gradients for IBU and calories measurements is a welcome improvement (\emph{``good addition''}, \emph{``... context is very useful''}, \emph{``allows to avoid very bitter beers''}).

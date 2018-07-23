@@ -1,0 +1,34 @@
+\section{Discussion} \label{sec:discussion}
+This section discusses the shortcomings of the proposed \textit{Beerlytics} system.
+Decisions made during the design, development, and evaluation of the project can impact the effectiveness of the system and the quality of the results.
+The experimental nature of the project hints towards a critical interpretation of the results as well.
+
+Firstly, the dataset stems exclusively from the \textit{RateBeer} platform.
+The website features specific characteristics and restrictions which its data inevitably mirrors explicitly and implicitly.
+Namely, the different rating schemes (weighted average, overall and style score, categorical rating) have an impact on the rating data but also the way users write about beers in their reviews.
+Moreover, rating assistance is displayed while authoring a review on \textit{RateBeer}.
+While this assistance is undoubtedly helpful for users, it offers predefined descriptors in each rating category which shape the review text.
+It would be interesting to consider other beer rating platforms such as \textit{BeerAdvocate}\footnote{\url{https://www.beeradvocate.com}, accessed: 17-07-2018} and \textit{Untappd}\footnote{\url{https://untappd.com}, accessed: 17-07-2018}.
+Perhaps it could be possible to create an aggregated dataset from a multitude of platforms and unifying the data from each source into a shared scheme.
+
+Secondly, the current system solely processes the textual part of user reviews.
+Considering further aspects of reviews before or after the word embedding training is a sensible option.
+Furthermore, StarSpace can embed entities of varying types in a shared vectorial space \cite{Wu2017}.
+Using StarSpace other aspects could already be included during training of the vector space model.
+Participants of the user testing also suggest considering the bias of review authors and the age of reviews (\emph{``consider bias of reviewers, try to pick the most neutral ones''}, \emph{``age of a review matters, old ones are not as interesting''}).
+
+Thirdly, the k-means algorithm used for clustering reviews is well proven and commonly used in data analysis \cite{Manning2009}.
+However, the choice of clustering algorithm has a fundamental impact on the computed clusters.
+Other techniques should be reviewed and tested for their performance in clustering reviews represented in vectorial space.
+It may be that different algorithms produce better results than the currently employed algorithm.
+Additionally, the current system does not satisfy the requirement of explainability.
+It is not able to explain the reasons for including a review in the final subset.
+Users feel the need to understand why a review is automatically selected (\emph{``Is it relevant for me?''}).
+
+Finally, using convenience sampling to gather participants of the user study can be criticized as well.
+It limits the subject group to a particular subgroup from the researcher's environment.
+This subgroup might not be representative of a potential real user group.
+Findings are therefore signals for further research and development directions.
+Furthermore, combining qualitative and quantitative research could have produced more valuable insights.
+It would also allow comparing the different word embedding algorithms using quantitative data (see also section \ref{sec:conclusion-future-work}).
+Increasing the test group size is a requirement for valid quantitative research.

@@ -1,0 +1,32 @@
+\section{Problem Statement} \label{sec:problem-statement}
+Visitors of beer review websites often receive recommendations for beers to try out.
+However, with an abundance of available recommendations to sample from the following question arises:
+\begin{quote}
+    \emph{``Why should I drink this beer? What is it about?''}
+\end{quote}
+Given a specific recommendation, users are left behind with official product descriptions and a multitude of reviews to read through.
+Marketing descriptions rarely uncover the actual characteristics of a product as their goal is to instigate attention and demand.
+Assuming that reviewers talk about these characteristics revealing them is possible by mining the free-form text.
+Word embedding algorithms create vectorial models for a vocabulary by taking the co-occurrence statistics of a word into account.
+\begin{quote}
+	\emph{``You shall know a word by the company it keeps.''} \cite{Firth1957}
+\end{quote}
+Building vectorial representations for the reviews of a product would allow performing numerical operations on them.
+The proposed \textit{Beerlytics} system aims to exploit these representations for the creation of visual product stories.
+It targets consumers and visitors of beer review websites.
+Ideally, the system is capable of conveying the most representative and diverse review while also highlighting the essential characteristics of the product.
+The visual product stories should be both factual and stylistically pleasing.
+Creating such a system would satisfy the short attention span of the current generation by supporting cognition of relevant information \cite{MicrosoftCanada2015}.
+Using different word embedding algorithms in an explorative and experimental nature for modeling products through their reviews is the primary concern of this work.
+Evaluating the system through user testing provides valuable insights into the preferences of users regarding visual product stories.
+
+\begin{quote}
+    \textbf{Research question:}\\
+    \emph{To what extent can a product be summarized by a visual story based on associated metadata and user-contributed reviews? (RQ)}
+\end{quote}
+
+\begin{quote}
+    \textbf{Further research questions:}\\
+    \emph{How can user-contributed reviews support the generation of visual stories for a product? (SRQ1)}\\
+    \emph{In which way is the quality of a visual story affected by using different word embedding techniques? (SRQ2)}
+\end{quote}

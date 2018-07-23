@@ -1,0 +1,244 @@
+\subsection*{Appendix C: MySQL Database} \label{sec:appendix-c}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+        \hline
+        \emph{Field} & \emph{Type} & \emph{Length} \\
+        \hline
+        id & INT & 11 \\
+        beer\textunderscore id & INT & 10 \\
+        embedding & VARCHAR & 10 \\
+        query & VARCHAR & 50 \\
+        neighbor & VARCHAR & 50 \\
+        similarity & DECIMAL & 10,10 \\
+        \hline
+    \end{tabular}
+    \caption{Schema for table beer\textunderscore nn} \label{tbl:schema.beer_nn}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+        \hline
+        \emph{Field} & \emph{Type} & \emph{Length} \\
+        \hline
+        id & INT & 11 \\
+        beer\textunderscore id & INT & 10 \\
+        place\textunderscore id & INT & 10 \\
+        \hline
+    \end{tabular}
+    \caption{Schema for table beer\textunderscore places} \label{tbl:schema.beer_places}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+        \hline
+        \emph{Field} & \emph{Type} & \emph{Length} \\
+        \hline
+        id & INT & 11 \\
+        name & VARCHAR & 100 \\
+        url & VARCHAR & 200 \\
+        \hline
+    \end{tabular}
+    \caption{Schema for table beer\textunderscore styles} \label{tbl:schema.beer_styles}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+        \hline
+        \emph{Field} & \emph{Type} & \emph{Length} \\
+        \hline
+        id & INT & 11 \\
+        beer\textunderscore id & INT & 10 \\
+        tag\textunderscore id & INT & 10 \\
+        \hline
+    \end{tabular}
+    \caption{Schema for table beer\textunderscore tags} \label{tbl:schema.beer_tags}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+        \hline
+        \emph{Field} & \emph{Type} & \emph{Length} \\
+        \hline
+        id & INT & 11 \\
+        url & VARCHAR & 200 \\
+        \hline
+    \end{tabular}
+    \caption{Schema for table beer\textunderscore urls\textunderscore global} \label{tbl:schema.beer_urls_global}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+        \hline
+        \emph{Field} & \emph{Type} & \emph{Length} \\
+        \hline
+        id & INT & 11 \\
+        url & VARCHAR & 200 \\
+        \hline
+    \end{tabular}
+    \caption{Schema for table beer\textunderscore urls\textunderscore nl} \label{tbl:schema.beer_urls_nl}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+        \hline
+        \emph{Field} & \emph{Type} & \emph{Length} \\
+        \hline
+        id & INT & 11 \\
+        name & VARCHAR & 100 \\
+        brewery\textunderscore id & INT & 10 \\
+        style\textunderscore id & INT & 10 \\
+        url & VARCHAR & 200 \\
+        location & VARCHAR & 50 \\
+        image & VARCHAR & 200 \\
+        description & VARCHAR & 1000 \\
+        overall & INT & 10 \\
+        style & INT & 10 \\
+        weighted\textunderscore verage & FLOAT & \\
+        total\textunderscore ratings & INT & 10 \\
+        ibu & INT & 10 \\
+        calories & INT & 10 \\
+        abv & FLOAT & \\
+        scraped & TINYINT & 1 \\
+        latitude & DECIMAL & 10,8 \\
+        longitude & DECIMAL & 11,8 \\
+        processed & TINYINT & 1 \\
+        \hline
+    \end{tabular}
+    \caption{Schema for table beers} \label{tbl:schema.beers}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+        \hline
+        \emph{Field} & \emph{Type} & \emph{Length} \\
+        \hline
+        id & INT & 11 \\
+        name & VARCHAR & 100 \\
+        url & VARCHAR & 200 \\
+        \hline
+    \end{tabular}
+    \caption{Schema for table breweries} \label{tbl:schema.breweries}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+        \hline
+        \emph{Field} & \emph{Type} & \emph{Length} \\
+        \hline
+        id & INT & 11 \\
+        slug & VARCHAR & 100 \\
+        name & VARCHAR & 100 \\
+        type & VARCHAR & 15 \\
+        street & VARCHAR & 50 \\
+        locality & VARCHAR & 50 \\
+        region & VARCHAR & 50 \\
+        country & VARCHAR & 50 \\
+        postal\textunderscore code & VARCHAR & 10 \\
+        rating\textunderscore count & INT & 10 \\
+        rating\textunderscore value & FLOAT & \\
+        facebook\textunderscore url & VARCHAR & 200 \\
+        twitter\textunderscore url & VARCHAR & 200 \\
+        website\textunderscore url & VARCHAR & 200 \\
+        telephone & VARCHAR & 30 \\
+        opening\textunderscore times & VARCHAR & 100 \\
+        image\textunderscore url & VARCHAR & 200 \\
+        scraped\textunderscore beers & TINYINT & 1 \\
+        latitude & DECIMAL & 10,8 \\
+        longitude & DECIMAL & 11,8 \\
+        \hline
+    \end{tabular}
+    \caption{Schema for table places} \label{tbl:schema.places}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+        \hline
+        \emph{Field} & \emph{Type} & \emph{Length} \\
+        \hline
+        id & INT & 11 \\
+        review\textunderscore id & INT & 10 \\
+        embedding & VARCHAR & 10 \\
+        cluster & TINYINT & 3 \\
+        is\textunderscore centroid & TINYINT & 1 \\
+        \hline
+    \end{tabular}
+    \caption{Schema for table review\textunderscore clusters} \label{tbl:schema.review_clusters}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+        \hline
+        \emph{Field} & \emph{Type} & \emph{Length} \\
+        \hline
+        id & INT & 11 \\
+        beer\textunderscore id & INT & 10 \\
+        user\textunderscore id & INT & 10 \\
+        date & DATE & \\
+        location & VARCHAR & 150 \\
+        text & VARCHAR & 10100 \\
+        score & FLOAT & \\
+        aroma & INT & 10 \\
+        appearance & INT & 10 \\
+        taste & INT & 11 \\
+        palate & INT & 11 \\
+        overall & INT & 11 \\
+        language & VARCHAR & 10 \\
+        \hline
+    \end{tabular}
+    \caption{Schema for table reviews} \label{tbl:schema.reviews}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+        \hline
+        \emph{Field} & \emph{Type} & \emph{Length} \\
+        \hline
+        id & INT & 11 \\
+        name & VARCHAR & 50 \\
+        \hline
+    \end{tabular}
+    \caption{Schema for table tags} \label{tbl:schema.tags}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+        \hline
+        \emph{Field} & \emph{Type} & \emph{Length} \\
+        \hline
+        id & INT & 11 \\
+        original\textunderscore token & VARCHAR & 100 \\
+        cleaned\textunderscore token & VARCHAR & 100 \\
+        \hline
+    \end{tabular}
+    \caption{Schema for table token\textunderscore dictionary} \label{tbl:schema.token_dictionary}
+\end{table}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{p{0.29\linewidth}p{0.29\linewidth}p{0.29\linewidth}}
+        \hline
+        \emph{Field} & \emph{Type} & \emph{Length} \\
+        \hline
+        id & INT & 11 \\
+        name & VARCHAR & 100 \\
+        total\textunderscore ratings & INT & 10 \\
+        \hline
+    \end{tabular}
+    \caption{Schema for table users} \label{tbl:schema.users}
+\end{table}
+
+\clearpage

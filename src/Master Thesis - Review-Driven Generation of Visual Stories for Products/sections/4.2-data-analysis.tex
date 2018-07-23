@@ -1,0 +1,152 @@
+\subsection{Data Analysis} \label{sec:data-analysis}
+The \textit{data analysis} process builds upon the result of the previous \textit{data collection} (Section \ref{sec:data-collection}) process.
+Its main goal is to transform raw data into useful information.
+More specifically it is crucial for building a visual product story which summarizes the original data and provides engaging insights.
+Data analysis is composed of 3 sequential steps which are covered in greater detail in the following sections:
+\begin{enumerate}
+	\item Data cleaning and preprocessing (Section \ref{sec:preprocessing})
+	\item Training Vector Space Models (VSM) using the 4 selected word embedding algorithms: word2vec, GloVe, fastText, and StarSpace (Section \ref{sec:vector-space-models})
+	\item Clustering of reviews and keyword extraction using the k-means \cite{Manning2009} and k-nearest neighbors (k-NN) \cite{Peterson2009} algorithms (Section \ref{sec:clustering})
+\end{enumerate}
+
+Due to the relatively large dataset (Section \ref{sec:data-persistence}), which contains mostly textual data, all computation is to be executed on a more capable and powerful system than personal consumer devices.
+As a support in this matter, access has been granted to the Distributed ASCI Supercomputer (DAS) in its fourth generation \cite{Bal2016}.
+Being designed for research areas with heavy demands for computational power and memory it is capable of handling the devised tasks.
+Furthermore, it is a system specifically built for running algorithms in parallel and on distributed nodes with an easy to use interface.
+
+
+\subsubsection{Preprocessing} \label{sec:preprocessing}
+Data cleaning and preprocessing is an essential first measure between collection and analysis.
+It aims to reduce noise and improve the quality of the underlying dataset.
+Furthermore, the original data is transformed into a format which can be consumed by the actual analysis process.
+The main goal of this technique boils down to the creation of training text files for each beer containing the respective preprocessed reviews.
+
+Prior to preprocessing the language of all reviews is identified.
+Multilingual word embeddings are out of scope for this research project which is the reason why only the subset of English reviews will be considered.
+Language detection is realized using the Python \textit{py-googletrans}\footnote{\url{https://github.com/ssut/py-googletrans}, accessed: 16-07-2018} library which relays calls to the official Google Translate API\footnote{\url{https://cloud.google.com/translate/docs/}, accessed: 16-07-2018}.
+As this is a one-time procedure it has been implemented as a relatively simple script\footnote{\url{https://github.com/SaschaVanEssen/Thesis/blob/master/Preprocessing/detectlangs.py}}.
+After detection succeeded it becomes apparent that 91.73\% (2,716,159 entries) of all reviews are written in English.
+This justifies the usage of the English subset as the available corpus is still large enough for training vector space models.
+
+With language identification in place, the actual cleaning and preprocessing tool can be used to generate the required training files.
+The transformation consists of 9 operations\footnote{\url{https://github.com/marc1404/msc-thesis/blob/master/embedding/src/cleanText.js}} working towards unification and removing unnecessary noise from the original reviews: (1) convert text to lowercase, (2) remove newline characters, (3) remove HTML tags, (4) remove digits, (5) remove text automatically added by \textit{RateBeer}, (6) tokenization, (7) stopword removal, (8) stemming, and (9) convert British spelling variations to their American counterpart (e.g., colour to color).
+
+While most operations are relatively straightforward step (6) tokenization, (7) stopword removal, and (8) stemming are of greater interest.
+Firstly, tokenization takes a character sequence (string) as its input and splits it up into discrete tokens \cite{Manning2009}.
+There exists a range of different strategies regarding the splitting points.
+This project uses a word tokenizer which breaks up sequences on anything but alphabetic characters, digits, and underscores\footnote{\url{https://github.com/NaturalNode/natural\#tokenizers}, accessed: 16-07-2018}.
+Secondly, common words with no semantic value are excluded in a process called stopword removal \cite{Manning2009}.
+A list of 109 stopwords\footnote{\url{https://github.com/fergiemcdowall/stopword/blob/master/lib/stopwords_en.js}, accessed: 16-07-2018} is used for filtering the tokens.
+Finally, word variations are reduced through the stemming operating using the algorithm by M.F. Porter which was originally published in 1980 \cite{Porter1980}.
+Review authors may use different words for the same semantic meaning (e.g., taste, tasteful, tastefulness).
+The suffixes of these words can be safely removed without altering the semantic meaning to one common root. 
+
+An example for the full preprocessing operation is provided here:
+\begin{quote}
+    \textbf{Original review:}\newline
+    \emph{``Bottle. Poured a very dark brown with a medium off-white head. Fruity aroma, raisins the most. Big warm sweet alcohol taste with currants and raisins. Has a very smooth aftertaste''}
+\end{quote}
+
+\begin{quote}
+    \textbf{After preprocessing:}\newline
+    \emph{``bottl pour dark brown medium off white head fruiti aroma raisin big warm sweet alcohol tast currant raisin smooth aftertast''}
+\end{quote}
+It becomes clear that while the preprocessed version is better suited for machines it is less readable for humans.
+The word embedding algorithms (Section \ref{sec:vector-space-models}) work exclusively with the preprocessed version.
+Any output gathered from the trained vector space models only contains truncated words.
+As the results are to be used in a frontend prototype (Section \ref{sec:system-design}) and subsequently shown to real users during user testing (Section \ref{sec:evaluation}) a mechanism is required which is able to transform stemmed works back into their original form.
+Naturally, such a mechanism does not exist due to the fact that stemming deliberately loses information.
+The relationship between a stemmed word and its origin counterparts is one-to-many.
+Therefore, a dictionary is created during the stemming operation which keeps original words for each stemmed token.
+This dictionary is saved to the database at the end of preprocessing (see Table \ref{tbl:schema.token_dictionary}).
+
+
+\subsubsection{Vector Space Models} \label{sec:vector-space-models}
+Using the training text files from preprocessing (Section \ref{sec:preprocessing}) vector space models (VSM) can be trained for each beer using the 4 selected word embedding algorithms: word2vec \cite{Mikolov2013}, GloVe \cite{Pennington}, fastText \cite{Bojanowski2016}, and StarSpace \cite{Wu2017}.
+The selection of word embedding techniques is guided by the following criteria: covering all state of the art algorithms, different research organizations, covering different years, popularity, and paper citations.
+The training procedure and their parameters are shortly covered for each word embedding algorithm in the order of publication year.
+
+\hfill
+
+\noindent
+\textbf{word2vec:} Training a word2vec model is realized using the Python \textit{gensim}\footnote{\url{https://radimrehurek.com/gensim/models/word2vec.html}, accessed: 16-07-2018} library.
+The training script\footnote{\url{https://github.com/marc1404/msc-thesis/blob/master/clustering/train_word2vec.py}} reads the training file line by line, every line being a preprocessed review.
+Each line is split up on whitespace into an array.
+These arrays are appended to an aggregation array essentially creating a matrix of reviews.
+This matrix is used by the gensim library to train a word2vec model which is then saved to the disk.
+The parameters used for this training algorithm are as follows: vector dimensionality = 100, initial learning rate (alpha) = 0.025, sliding window = 5, continuous bag of words (CBOW) is used as the training algorithm, negative sampling is used as the loss function with 5 noise words, and 5 iterations (epochs) are performed on the corpus.
+
+\hfill
+
+\noindent
+\textbf{GloVe:} Training of a GloVe model is possible using the 4 provided command-line interfaces (CLI)\footnote{\url{https://github.com/marc1404/msc-thesis/blob/master/misc/train_glove.sh}} of the tool.
+Firstly, a unigram count vocabulary is created from the training file with a minimum size of 10 and a maximum size of 100,000 entries.
+Secondly, word co-occurrence statistics are calculated using the training file and the previously generated vocabulary.
+Only the left side of the context is considered (symmetric = 0) with a window size of 10.
+Thirdly, the co-occurrence statistics file is shuffled and saved back into a new file.
+Finally, using the vocabulary and shuffled co-occurrence file training of the GloVe model is triggered.
+Parameters for this training are as follows: vector dimensionality = 100, initial learning rate (alpha) = 0.75, and 25 iterations (epochs) are performed on the corpus.
+
+\hfill
+
+\noindent
+\textbf{fastText:} In a similar fashion to GloVe training a fastText model is performed using a single CLI\footnote{\url{https://github.com/marc1404/msc-thesis/blob/master/misc/train_fasttext.sh}}.
+It creates a skip-gram model which considers character n-grams with a minimum size of 3 and a maximum size of 6.
+Further parameters used for training are: vector dimensionality = 100, minimal number of word occurrences = 5, initial learning rate (alpha) = 0.05, sliding window size = 5, negative sampling as the loss function with 5 noise words, and it performs 5 iterations (epochs) on the corpus.
+
+\hfill
+
+\noindent
+\textbf{StarSpace:} Being the successor to fastText training a StarSpace model follows a similar pattern.
+Using the StarSpace CLI a vector model can be trained from a given corpus\footnote{\url{https://github.com/marc1404/msc-thesis/blob/master/misc/train_starspace.sh}}.
+Parameters used for this training are as follows: vector dimensionality = 100, training mode = 5 for unsupervised training using only input, initial learning rate (alpha) = 0.01, sliding window size = 5, and 5 iterations (epochs) are performed on the corpus.
+
+\hfill
+
+The trained vector space models for each beer and word embedding algorithm are used in the final step of the data analysis process (Section \ref{sec:clustering}).
+Models created by GloVe and StarSpace are subject to a transformation due to their internal format being different from word2vec and fastText.
+This will be discussed in the next section.
+
+
+\subsubsection{Clustering} \label{sec:clustering}
+The final process of the data analysis pipeline uses \textit{clustering} algorithms to compute information which is used for the realization of visual product stories in the frontend prototype (Section \ref{sec:system-design}).
+Namely, 2 objectives are pursued:
+\begin{itemize}
+	\item Clustering of beer reviews in order to identify a representative and diverse subset covering the main aspects.
+	\item Keyword-based insight into the way how users write about different aspects of a beer.
+\end{itemize}
+
+Before the actual cluster computation, a standard interface is required for using the different vector space models (Section \ref{sec:vector-space-models}).
+As previously mentioned the models generated by GloVe and StarSpace differ slightly from the shared format used by word2vec and fastText.
+Furthermore, the gensim library offers the \textit{KeyedVectors}\footnote{\url{https://radimrehurek.com/gensim/models/keyedvectors.html}, accessed: 16-07-2018} module which implements such a standard interface.
+It can directly load model output from word2vec and fastText which speaks for converting GloVe and StarSpace models to the shared format.
+Regarding the GloVe model gensim provides a built-in conversion script\footnote{\url{https://radimrehurek.com/gensim/scripts/glove2word2vec.html}, accessed: 16-07-2018}.
+Due to the recent publication of StarSpace, a custom solution\footnote{\url{https://github.com/marc1404/msc-thesis/blob/master/clustering/starspace_tsv2txt.py}, accessed: 16-07-2018} converts the tab-separated values file (.tsv) generated by the tool into the original word2vec format.
+The differences are minimal: whitespaces separate values instead of tabs and the first line specifies both the vocabulary size and dimensionality of the vectors: \textit{<vocabulary size><whitespace><vector size>}
+
+Clustering of a beer's reviews is performed using the \textit{k-means} algorithm.
+It is a standard clustering technique dividing the input data into \textit{k} disjoint groups \cite{Manning2009}.
+Reviews from the same cluster are similar to each other while being different to reviews from other clusters.
+The assumption that k-means allows selecting cluster centroids as representative (for their cluster) and yet diverse (centroids are different to each other) reviews justifies the use of this algorithm for this project.
+Reviews are clustered through the following process:
+\begin{enumerate}
+	\item Randomly select \textit{k} reviews as the initial cluster centers
+	\item Repeat:
+	\item Calculate distance between each review and cluster center, assign reviews to their nearest cluster center
+	\item For each review cluster re-calculate the cluster center
+	\item until the center of all clusters remains unchanged
+\end{enumerate}
+
+As k-means works by calculating distances between data points all textual reviews of a beer are converted into their vector representation\footnote{\url{https://github.com/marc1404/msc-thesis/blob/master/clustering/run_kmeans.py}}.
+This vector representation is used as input for the k-means algorithm implemented by the \textit{scikit-learn} Python library \cite{Pedregosa2012}.
+The hyperparameter \textit{k} equals 5 in this project to support the goal of selecting a subset of reviews that summarizes the product.
+Once the clustering algorithm converges pairwise distance calculation between cluster centers and reviews identifies the centroid review for each cluster\footnote{\url{https://github.com/marc1404/msc-thesis/blob/master/clustering/kmeans.py}}.
+The last step of review clustering is saving the computation result to the database (see Table \ref{tbl:schema.review_clusters}).
+
+Keyword-based insights are realized using the \textit{k-nearest neighbors (k-NN)} algorithm.
+Provided with a test sample (i.e., a keyword) the algorithm calculates the Euclidean distance to all other data points \cite{Peterson2009}.
+The \textit{k} nearest data points are selected and returned.
+The KeyedVectors gensim module already provides the calculation of k-NN through its interface.
+Using the official \textit{RateBeer} rating aspects in combination with a hand-picked selection of frequent terms in reviews creates a list of 10 query keywords: (1) taste, (2) palate, (3) overall, (4) aroma, (5) appearance, (6) pour, (7) bottle, (8) price, (9) color, and (10) smell.
+Each model is probed for the 10 nearest neighbors for each query from the keyword list. list\footnote{\url{https://github.com/marc1404/msc-thesis/blob/master/clustering/query_nn.py}}.
+The resulting output is saved to the database (see Table \ref{tbl:schema.beer_nn}).
